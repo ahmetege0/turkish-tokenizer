@@ -25,6 +25,8 @@ Kullanim:
 import argparse
 import json
 import logging
+import os
+import re
 import sys
 import time
 from hashlib import blake2b
@@ -135,15 +137,53 @@ def dedup_key(s):
     return int.from_bytes(blake2b(norm.encode("utf-8"), digest_size=8).digest(), "big")
 
 
+def split_long(text, limit):
+    """
+    Limitten uzun metni CUMLE SINIRLARINDAN ~limit'lik parcalara boler.
+
+    Neden gerekli: OzenliDerlem ve AkademikDerlem'de metin tek parca geliyor,
+    icinde hic satir sonu yok. Sadece "\\n" ile bolup uzun olani atinca
+    ozenli'nin %69'unu, akademik'in %87'sini kaybediyorduk -- ustelik yanli
+    sekilde, cunku sadece kisa makaleler hayatta kaliyordu.
+
+    Noktalamasiz dev bir blok gelirse kelime sinirindan bolunur; hicbir sey
+    sessizce atilmaz. Gercek cop zaten low_letters/few_words filtresine takilir.
+    """
+    if len(text) <= limit:
+        yield text
+        return
+
+    buf = ""
+    for sentence in re.split(r"(?<=[.!?…])\s+", text):
+        while len(sentence) > limit:          # noktalamasiz dev blok: kelimeden bol
+            cut = sentence.rfind(" ", 0, limit)
+            cut = cut if cut > 0 else limit
+            if buf:
+                yield buf
+                buf = ""
+            yield sentence[:cut]
+            sentence = sentence[cut:].lstrip()
+        if len(buf) + len(sentence) + 1 > limit:
+            if buf:
+                yield buf
+            buf = sentence
+        else:
+            buf = f"{buf} {sentence}".strip()
+    if buf:
+        yield buf
+
+
 def record_lines(record, field):
     """
     Bir kayittan ham satirlari uretir.
     Alan liste ise (forum'un 'texts' alani) her eleman ayri ayri islenir.
+    Satir sonlarindan bolunur, cok uzun parcalar ayrica cumlelere ayrilir.
     """
     value = record.get(field)
     for part in (value if isinstance(value, list) else [value]):
         if isinstance(part, str):
-            yield from part.split("\n")
+            for raw in part.split("\n"):
+                yield from split_long(raw, MAX_LINE_CHARS)
 
 
 def record_ok(record, source_name):
@@ -365,3 +405,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # datasets kutuphanesi arka planda indirme thread'leri birakiyor ve Python
+    # cikista onlari bekliyor. Dosyalar kapandi, state kaydedildi, log bosaltildi;
+    # asili kalmamak icin sureci burada bitiriyoruz.
+    logging.shutdown()
+    os._exit(0)
