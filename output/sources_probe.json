@@ -1,0 +1,1835 @@
+{
+  "ok": {
+    "musteri": {
+      "repo": "turkish-nlp-suite/MusteriYorumlari",
+      "configs": {
+        "default": {
+          "fields": {
+            "text": "str",
+            "label": "int"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 96.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 96.0,
+          "previews": [
+            {
+              "text": {
+                "type": "str",
+                "len": 68,
+                "preview": "Ürünleri 2025 olarak göndereceğiz dedikleri halde öyle gönderilmemiş"
+              },
+              "label": {
+                "type": "int",
+                "value": "1"
+              }
+            },
+            {
+              "text": {
+                "type": "str",
+                "len": 115,
+                "preview": "Ürün görseldeki gibi. kalitelisini beğenmeedim. yumuşak ama çok ince diğer rengini de aldım o daha kaliteli ve kalı"
+              },
+              "label": {
+                "type": "int",
+                "value": "2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "senti": {
+      "repo": "turkish-nlp-suite/SentiTurca",
+      "configs": {
+        "movies": {
+          "fields": {
+            "text": "str",
+            "label": "int"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 455.1
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 455.1,
+          "previews": [
+            {
+              "text": {
+                "type": "str",
+                "len": 174,
+                "preview": "İnandırıcılıktan oldukça uzak yapay bir fotoğraf sanatçılığı üzerine kurulmuş senaryosuyla, üçlü lezbiyen ilişkiyi kötü oyunculukla anlatamayan oldukça sıradan bir film. 2/10"
+              },
+              "label": {
+                "type": "int",
+                "value": "0"
+              }
+            },
+            {
+              "text": {
+                "type": "str",
+                "len": 470,
+                "preview": "Recep İvedik ve Kutsal Damacana'yı Hollywood çekseydi nasıl olurdu sorusuna cevap veren bir film. Bir komedi filmi için orjinal bir konu, farklı bir tarzda da işlenmiş fakat filmdeki esprilerin tamamına yakını belaltı. Filmdeki bazı sahneler için gülmedim diyemem, izlerken de sıkmıyor fakat dediğim gibi seviye inanılmaz düşük ve bir süre sonra rahatsız ediyor her olayın belaltına bağlanması. Filmi beğenmek için izlerken sizin de seviyenizi baya bir düşürmeniz gerek."
+              },
+              "label": {
+                "type": "int",
+                "value": "1"
+              }
+            }
+          ]
+        },
+        "e-commerce": {
+          "fields": {
+            "text": "str",
+            "label": "int"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 96.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 96.0,
+          "previews": [
+            {
+              "text": {
+                "type": "str",
+                "len": 68,
+                "preview": "Ürünleri 2025 olarak göndereceğiz dedikleri halde öyle gönderilmemiş"
+              },
+              "label": {
+                "type": "int",
+                "value": "1"
+              }
+            },
+            {
+              "text": {
+                "type": "str",
+                "len": 115,
+                "preview": "Ürün görseldeki gibi. kalitelisini beğenmeedim. yumuşak ama çok ince diğer rengini de aldım o daha kaliteli ve kalı"
+              },
+              "label": {
+                "type": "int",
+                "value": "2"
+              }
+            }
+          ]
+        },
+        "hate": {
+          "fields": {
+            "baslik": "str",
+            "text": "str",
+            "label": "int"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 333.5,
+            "baslik": 26.1
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 333.5,
+          "previews": [
+            {
+              "baslik": {
+                "type": "str",
+                "len": 8,
+                "preview": "hinduizm"
+              },
+              "text": {
+                "type": "str",
+                "len": 81,
+                "preview": "hayatta yapilan iyi kotu her$eyin gelecek ya$amlarini etkileyecegi inanci vardir."
+              },
+              "label": {
+                "type": "int",
+                "value": "2"
+              }
+            },
+            {
+              "baslik": {
+                "type": "str",
+                "len": 30,
+                "preview": "kadinlari-itici-yapan-detaylar"
+              },
+              "text": {
+                "type": "str",
+                "len": 143,
+                "preview": "kocaman gözleri, kocaman ağızları ve minicik memeleri ile afacan erkek çocuğu gibi görünmeleri. saçları da küt ve daha kısası ise gachın derim."
+              },
+              "label": {
+                "type": "int",
+                "value": "2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "sinema": {
+      "repo": "turkish-nlp-suite/BuyukSinema",
+      "configs": {
+        "default": {
+          "fields": {
+            "text": "str",
+            "label": "int"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 457.8
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 457.8,
+          "previews": [
+            {
+              "text": {
+                "type": "str",
+                "len": 174,
+                "preview": "İnandırıcılıktan oldukça uzak yapay bir fotoğraf sanatçılığı üzerine kurulmuş senaryosuyla, üçlü lezbiyen ilişkiyi kötü oyunculukla anlatamayan oldukça sıradan bir film. 2/10"
+              },
+              "label": {
+                "type": "int",
+                "value": "1"
+              }
+            },
+            {
+              "text": {
+                "type": "str",
+                "len": 470,
+                "preview": "Recep İvedik ve Kutsal Damacana'yı Hollywood çekseydi nasıl olurdu sorusuna cevap veren bir film. Bir komedi filmi için orjinal bir konu, farklı bir tarzda da işlenmiş fakat filmdeki esprilerin tamamına yakını belaltı. Filmdeki bazı sahneler için gülmedim diyemem, izlerken de sıkmıyor fakat dediğim gibi seviye inanılmaz düşük ve bir süre sonra rahatsız ediyor her olayın belaltına bağlanması. Filmi beğenmek için izlerken sizin de seviyenizi baya bir düşürmeniz gerek."
+              },
+              "label": {
+                "type": "int",
+                "value": "7"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "vitamin": {
+      "repo": "turkish-nlp-suite/vitamins-supplements-reviews",
+      "configs": {
+        "default": {
+          "fields": {
+            "product_name": "str",
+            "brand": "str",
+            "text": "str",
+            "star": "int"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 60.6,
+            "product_name": 33.6,
+            "brand": 7.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 60.6,
+          "previews": [
+            {
+              "product_name": {
+                "type": "str",
+                "len": 35,
+                "preview": "Vitamin C 500 Mg Takviye Edici Gıda"
+              },
+              "brand": {
+                "type": "str",
+                "len": 8,
+                "preview": "Venatura"
+              },
+              "text": {
+                "type": "str",
+                "len": 15,
+                "preview": "güvenilir marka"
+              },
+              "star": {
+                "type": "int",
+                "value": "5"
+              }
+            },
+            {
+              "product_name": {
+                "type": "str",
+                "len": 25,
+                "preview": "Plus Efervesan 3'lü Paket"
+              },
+              "brand": {
+                "type": "str",
+                "len": 8,
+                "preview": "Sambucol"
+              },
+              "text": {
+                "type": "str",
+                "len": 49,
+                "preview": "Hızlı kargo. Güzel paketlenmiş. Orijinal ürünler."
+              },
+              "star": {
+                "type": "int",
+                "value": "5"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "forum": {
+      "repo": "turkish-nlp-suite/ForumSohbetleri",
+      "configs": {
+        "donanimarsivi": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 1512.9,
+            "url": 84.7
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1512.9,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 83,
+                "preview": "https://forum.donanimarsivi.com/konu/modeme-baglananlari-nasil-cikarabilirm.790705/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 5,
+                "total_chars": 732,
+                "avg_item_chars": 146.4,
+                "preview": "Nasıl değiştirilir bilmiyorum"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 85,
+                "preview": "https://forum.donanimarsivi.com/konu/indirme-yaparken-internet-gitti-gelmiyor.799951/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 9,
+                "total_chars": 1832,
+                "avg_item_chars": 203.6,
+                "preview": "Hangi firma? Netspeed yapmıştı bunu bize. Öylesine gitti 2 hafta gelmedi internet."
+              }
+            }
+          ]
+        },
+        "donanimhaber": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 1823.6,
+            "url": 43.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1823.6,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 43,
+                "preview": "https://forum.donanimhaber.com/---112654287"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 2,
+                "total_chars": 1203,
+                "avg_item_chars": 601.5,
+                "preview": "AMD Athlon X4 860k İşlemci Gigabyte F2A68HM-DS2 Anakart Kingston HyperX XMP 8 GB 2x4 1600 Mhz CL9 Ram Sapphire R7 265 Dual-X 2 GB 256 Bit Ekran kartı WD Blue 1 TB 7200 RPM Harddisk Aerocool GT Black Edition 500W Kasa webdenaldan toplayabilirsin bütçeni 100 TL aşabilir."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 43,
+                "preview": "https://forum.donanimhaber.com/---113134968"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 2,
+                "total_chars": 327,
+                "avg_item_chars": 163.5,
+                "preview": "Maalesef bakkal işi geliştirme yapmışsınız. Oyun oynamıyor iseniz elinizdeki çağ dışı sistemi satıp yerine bu parçaları almanızı öneririm : H81M P33 G1840 4GB DDR3 1TB HDD + 120 GB SSD (yada tek 120'lik yeter derseniz sadece SSD alın.) Sistem çok hızlı olacaktır ve oyun oynamayacağınıza göre işinizi her türlü görecektir."
+              }
+            }
+          ]
+        },
+        "forumum": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 1020.7,
+            "url": 79.7
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1020.7,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 93,
+                "preview": "https://www.forumum.net/3d-mimari/388404-real-draw-la-resim-kesmeye-yard-m-lutfen-yardim.html"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 2,
+                "total_chars": 641,
+                "avg_item_chars": 320.5,
+                "preview": "ReAL DRAW LA ReSiM KesMeYe YarDıM... LuTFeN yaRdIM Arkadaşlar Real Drawla ResiM Kesicem Resimin Etrafını Yapıyorum Ama Başladım Yerede GeliyoruM Yuvarlak Oluşuyor Ama O Alanı Kesmiyor Kesmem İcin Ne YapmalıyıM YarDım Eden Etmeyene Cok TşkR EdeRiM... RePLeRim SiziNL&"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 85,
+                "preview": "https://www.forumum.net/3d-mimari/2022900-as3-ile-php-veri-gonderip-yonlendirmek.html"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 1,
+                "total_chars": 494,
+                "avg_item_chars": 494.0,
+                "preview": "as3 ile php veri gönderip yönlendirmek iyi günler arkadaşlar, flash as3 te ufak bir sorunum vardı as2 de flashtan php ye post yoluyla veri yolluyordum aynı zamanda o sayfaya yönleniyordu Kod: var veri:LoadVars = new LoadVars ;veri. kod = \"gidecek veri\";veri. send ; böyle basit bir şekilde butona tıkladığımda swfnin bulunduğu sayfada gonder. php açılıyordu hem de veriyi yollamış oluyordum as3 te bunu nasıl yapabilirim en basitiyle yardımcı olursanız sevinirim dün geceden beri bulduklarım..."
+              }
+            }
+          ]
+        },
+        "iyinet": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 1549.6,
+            "url": 66.3
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1549.6,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 56,
+                "preview": "https://iyinet.com/konu/uygulama-yaptirilacaktir.282024/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 1,
+                "total_chars": 1474,
+                "avg_item_chars": 1474.0,
+                "preview": "@%1; Özel bir uygulama yazdırılacaktır. Ugulamanın özellikleri 1. Uygulamaya adres bilgileri veya anlık google map bilgileri ile kayıt olma 2. Üye kayıt olma 3. Eşleştirme ve haber verme 4. Üyeleri haritalar üzerinden gösterme Yukarıdaki maddelerin detay bilgileri olacak şekilde Android uygulama yazdırılacaktır. Şartlar 1. Sabit telefondan ulaşılabilen kişi veya kuruluşlar 2. Banka hesabı kendi adına olan 3. Fatura kesebilecek 4. Proje zaman planı verebilecek ve zaman planına sadık kalacak 5. Önden kesinlikle avans ödemesi yapılmayacaktır. 6. Kodlar Üniversite tarafından onaylandıktan sonra ilgili ödeme yapılacaktır."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 80,
+                "preview": "https://iyinet.com/konu/spotify-listesini-youtubea-aktarma-nasil-yapilir.292208/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 1,
+                "total_chars": 1678,
+                "avg_item_chars": 1678.0,
+                "preview": "Ülkemizde henüz birkaç aylık süredir yaygın olarak duyulmaya başlamış olsa da Spotify, yaklaşık 10 yıldan beri varlığını sürdürmekte olan müzik platformudur. Online olarak hizmetlerini sağlamakta olan platform, kolay kullanılabilir olan ara yüzü ile birlikte müzik dinlemek isteyen kişilere yasal yollardan bu hakkı tanıyan platformdur. Bilgisayar üzerinden kullanılabilir olmasının dışında cep telefonları üzerinden de kullanılabilen Spotify özel programlar sayesinde avantaj sağlamaktadır. Ancak cep telefonundaki şarkı listelerini Youtube üzerine geçirmek isteyen kişiler için sunulan programlar, bu ihtiyaçların karşılanmasını mümkün hale getirmektedir."
+              }
+            }
+          ]
+        },
+        "kadinlarklubu": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 8895.6,
+            "url": 83.2
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 8895.6,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 73,
+                "preview": "https://www.kadinlarkulubu.com/konu/10-aylik-bebek-tatil-onerisi.1073908/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 2,
+                "total_chars": 1401,
+                "avg_item_chars": 700.5,
+                "preview": "tatil anlayisi kamp kurmak, yuruyus yapmak, ya da plajda sabahtan aksama yatmak olan bir cift olarak bu yil tatile gidecegimiz zamanda 10 aylik olacak oglumla nasil bir plan yapabiliriz dusunduk dusunduk bulamadik. 6 gunluk ve 12 gunluk iki farkli zamanda tatil planlamamiz gerekiyor, cocukla cok uzun saatler yolda gecirmek istemiyoruz, ama 2 yildir tatil yapamadim azicik yuzmeye ihtiyacim var, bir yandan tur seklinde cekiyor canimiz... Boyle kucuk bebeklerle yaptiginiz tatiller, olumlu ve olumsuz yonleri nelerdi? belleza"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 96,
+                "preview": "https://www.kadinlarkulubu.com/konu/11-aylik-bebekle-gidilebilecek-kaliteli-iyi-bir-otel.373603/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 5,
+                "total_chars": 2405,
+                "avg_item_chars": 481.0,
+                "preview": "terzi kendi söküğünü dikemezmiş ya aynen öyle bir turizmci olarak yüzlerce kişinin tatil organizasyonunu yapıyor ve kültür turları organize ediyorum kişisel tatillerimide kendim ayarlıyorum ama bebeğim olunca iş değişti çok tedirginim ve kafam karışık Ağustos ayında tatile çıkıcaz ve bebeğim o zaman 11 aylık olacak bebeğimle rahat edebileceğim onunda keyif alabileceği iyi bir otel istiyorum genelde hep belekte tatil yaparız, öncelikli tercih yerim belek sonra kemer veya side _DURU_24 BÜYÜK VE KÜÇÜK AŞKNA"
+              }
+            }
+          ]
+        },
+        "memurlar": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 106321.5,
+            "url": 77.9
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 106321.5,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 82,
+                "preview": "https://forum.memurlar.net/konu/2545422/caykur-a-atananlar-icin-bilgilendirme.html"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 13,
+                "total_chars": 1666,
+                "avg_item_chars": 128.2,
+                "preview": "Çaykura bir önceki atamada yerleşen biri olarak yeni atanan arkadaşlara dilimiz döndüğünce bilgi vermek isteriz. herkese hayırlı olsun."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 58,
+                "preview": "https://forum.memurlar.net/konu/2553936/dhmi-tazminat.html"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 24,
+                "total_chars": 3075,
+                "avg_item_chars": 128.1,
+                "preview": "umarım kesindir. candidman bunun üzerine bir soğuk su içer"
+              }
+            }
+          ]
+        },
+        "tahribat": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 3653.4,
+            "url": 73.5
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 3653.4,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 58,
+                "preview": "https://www.tahribat.com/forum/netv-gold-uygulamasi-256609"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 7,
+                "total_chars": 1590,
+                "avg_item_chars": 227.1,
+                "preview": "Android Cihazlarda Netv Gold uygulaması güvenilir mi. Yayınların Kalitesi çok güzel kullanmakta sakınca olabilir mi acaba https://netvgold.net.tr/app/ kontrol edebilecek birisi çıkarmı. Boş insan"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 81,
+                "preview": "https://www.tahribat.com/forum/android---windows-yedekleme-vb-icin-yazilim-255122"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 2,
+                "total_chars": 763,
+                "avg_item_chars": 381.5,
+                "preview": "Ayarlardan geliştirici seçeneklerini aktif edip usb hata ayıklamayı açmayı unutma. https://github.com/Genymobile/scrcpy Herkesten, her şeyden umudunuzu kestiğiniz bir anda belki de kurtarıcı sizsinizdir."
+              }
+            }
+          ]
+        },
+        "technopatsosyal": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 1765.2,
+            "url": 80.6
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1765.2,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 90,
+                "preview": "https://www.technopat.net/sosyal/konu/su-ana-kadar-izlediginiz-en-iyi-anime-nedir.2954407/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 33,
+                "total_chars": 2408,
+                "avg_item_chars": 73.0,
+                "preview": "Code Geass."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 83,
+                "preview": "https://www.technopat.net/sosyal/konu/seinen-tarzinda-manga-anime-oenerisi.2396267/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 9,
+                "total_chars": 728,
+                "avg_item_chars": 80.9,
+                "preview": "Hocam fate serisini izleyebilirsiniz. Bazı sezonları seinen bazıları shounen. Birçok sezonu bulunuyor. Fate Zero ardından Fate/stay night: Unlimited Blade works izleseniz tatmin olursunuz gayet güzel bir seridir."
+              }
+            }
+          ]
+        },
+        "turkiyeforum": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 2976.1,
+            "url": 49.7
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 2976.1,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 49,
+                "preview": "https://www.turkiyeforum.com/viewtopic.php?t=1361"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 70,
+                "total_chars": 9069,
+                "avg_item_chars": 129.6,
+                "preview": "Evet şuan kullandığımız nicklerin anlamını, bizim için ne ifade ettiğini yada hikayesini buraya yazalım. İlginç hikayeleri bekliyorum. Buyrun, siz önden başlayın bende nickimin hikayesini anlatırım bi ara"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 49,
+                "preview": "https://www.turkiyeforum.com/viewtopic.php?t=3608"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 20,
+                "total_chars": 1577,
+                "avg_item_chars": 78.8,
+                "preview": "iyi ki geldin (: Sana mucizeler vaad etmedim; bir mucize verdim.. ' 01.12.2007"
+              }
+            }
+          ]
+        },
+        "wardom": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 2851.5,
+            "url": 77.3
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 2851.5,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 59,
+                "preview": "https://www.wardom.org/threads/delcam-products-2010.317508/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 19,
+                "total_chars": 3926,
+                "avg_item_chars": 206.6,
+                "preview": "crack ı tekrar indir crack linki ayrıca verirsen tabiki indiririmmm"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 75,
+                "preview": "https://www.wardom.org/threads/autocad-2016-x64-portable-kurulumsuz.557695/"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 7,
+                "total_chars": 1081,
+                "avg_item_chars": 154.4,
+                "preview": "Accounts yoksa parçalı olması daha iyi.. tek part büyük dosya free indirmede zaman aşımı yapıyor.. sonra ister istemez ağzımız bozuluyor bu şekil"
+              }
+            }
+          ]
+        },
+        "wmaraci": {
+          "fields": {
+            "url": "str",
+            "texts": "list"
+          },
+          "text_field": "texts",
+          "field_avg_chars": {
+            "texts": 780.7,
+            "url": 80.8
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 780.7,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 76,
+                "preview": "https://wmaraci.com/forum/action-script/as3-ile-nesneyi-dondurme-668099.html"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 3,
+                "total_chars": 293,
+                "avg_item_chars": 97.7,
+                "preview": "while döngüsü ile yapabilirsin. katılıyorum"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 71,
+                "preview": "https://wmaraci.com/forum/action-script/as3-animasyon-yapimi-55668.html"
+              },
+              "texts": {
+                "type": "list",
+                "n_items": 1,
+                "total_chars": 207,
+                "avg_item_chars": 207.0,
+                "preview": "as3 bilgisi iyi olan birinin yardımına ihtiyacım var. bir oyun içerisindeki bazı animasyonları ücretsiz veya küçük bir ücret karşılığında yapacak olan birileri varmı? Yapablecek olanlar pm ile ulaşabilirler."
+              }
+            }
+          ]
+        }
+      }
+    },
+    "wiki": {
+      "repo": "turkish-nlp-suite/temiz-Wiki",
+      "configs": {
+        "default": {
+          "fields": {
+            "url": "str",
+            "title": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 21296.9,
+            "url": 45.9,
+            "title": 10.8
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 21296.9,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 42,
+                "preview": "https://tr.wikipedia.org/wiki/Cengiz%20Han"
+              },
+              "title": {
+                "type": "str",
+                "len": 10,
+                "preview": "Cengiz Han"
+              },
+              "text": {
+                "type": "str",
+                "len": 100459,
+                "preview": "Cengiz Han (doğum adıyla Temuçin, 18 Ağustos 1227), Moğol İmparatorluğu'nun kurucusu ve ilk Kağanı olan Moğol komutan ve hükümdardır. Hükümdarlığı döneminde gerçekleştirdiği hiçbir savaşı kaybetmeyen Cengiz Han, dünya tarihinin en büyük askeri liderlerinden birisi olarak kabul edilmektedir. 13. yüzyılın başında Orta Asya'daki tüm göçebe bozkır kavimlerini birleştirip bir ulus haline getirerek Moğol siyasi kimliği çatısı altında toplamıştır. Cengiz Han, hükümdarlığı döneminde, 1206-1227 arasında, Kuzey Çin'deki Batı Xia ve Jin Hanedanı; Türkistan'daki Kara Hıtay, Maveraünnehir; Harezm, Horasan ..."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 67,
+                "preview": "https://tr.wikipedia.org/wiki/Film%20%28anlam%20ayr%C4%B1m%C4%B1%29"
+              },
+              "title": {
+                "type": "str",
+                "len": 19,
+                "preview": "Film (anlam ayrımı)"
+              },
+              "text": {
+                "type": "str",
+                "len": 518,
+                "preview": "Film şu anlamlara gelebilir: Camlara yapıştırılarak içerinin görünmesini engelleyen bir tür ince yaprak Sinemacılıkta, bir oyunun bütününü taşıyan şerit veya şeritlerin bütünü Film (fotoğrafçılık), fotoğrafçılıkta, radyografide ve sinemacılıkta resim çekmek için kullanılan; selülozdan, saydam, bükülebilir şerit Film (sinema), sinema makinesiyle gösterilen eser, izleti Film (film), Samuel Beckett'in yazdığı tek senaryodan çekilen 1965 ABD yapımı film Total Film, 1997'den beri İngiltere'de yayımlanan sinema dergisi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "havadis": {
+      "repo": "turkish-nlp-suite/Havadis",
+      "configs": {
+        "default": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 1870.3,
+            "url": 87.1
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1870.3,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 69,
+                "preview": "https://www.cnnturk.com/ajanda/1-karat-kac-gramdir-bir-karat-kac-gram"
+              },
+              "text": {
+                "type": "str",
+                "len": 2211,
+                "preview": "1 Karat Kaç Gramdır? Bir Karat Kaç Gram? Değerli madenleri ölçmek için kullanılan bir ölçü birimi olarak karat ifade edilmektedir. Özellikle elmas başta olmak üzere pek çok değerli madeni ölçmek amaçlı önemli bir yere sahiptir. Bu doğrultuda karat ölçüm birimi aynı zamanda gram üzerinden de dönüşüm şansı vermektedir. Bu dönüşüm üzerinden bakıldığında ise bir karat 0,2 grama denk gelir. Böylece değerli taş madenlerin kütleleri hesabı yapılmak suretiyle buna uygun şekilde fiyatlandırması çıkarılır. Özellikle de güncel piyasa konusunda önemli yere sahiptir. 1 Karat Kaç Gramdır? Karat kelimesi günlük yaşamda çok sık karşılaşılan bir sözcük olarak öne çıkar."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 99,
+                "preview": "https://www.cnnturk.com/ajanda/1-yumurta-kac-gram-protein-icerir-bir-yumurtada-ne-kadar-protein-var"
+              },
+              "text": {
+                "type": "str",
+                "len": 2334,
+                "preview": "1 Yumurta Kaç Gram Protein İçerir? Bir Yumurtada Ne Kadar Protein Var? Protein bakımından zengin yiyecekleri ön plana çıktığında bu konuda yumurta ön sıralarda yer alır. Hem uygun maliyeti hem de kolayca tüketimi ile birlikte et ve tavuğa göre daha fazla tercih edilmektedir. Çünkü kırmızı et ile tavuk gibi önemli oranda protein irtibatı sağladığını söylemek mümkün. Bu doğrultuda 100 gram üzerinden ele alındığında yumurta 13 gram protein sağlar. Tabii bu durum ortalama üzerinden bir yumurta ile alındığında 6,5 gram ettiğini söylemek gerekir. 1 Yumurta Kaç Gram Protein İçerir? Yumurta en sevilen ve aynı zamanda en çok tüketilen sağlıklı besin kaynakları içerisinde yer alır."
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ozenli": {
+      "repo": "turkish-nlp-suite/OzenliDerlem",
+      "configs": {
+        "GeziNotlari": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 3556.4,
+            "url": 83.2
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 3556.4,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 92,
+                "preview": "https://www.atlasdergisi.com/atlas-dergisi/atlas-artik-yuzde-100-geri-donusumlu-kagitta.html"
+              },
+              "text": {
+                "type": "str",
+                "len": 956,
+                "preview": "Kaynakların sürdürülebilir kullanımı, iklim kriziyle mücadele ve ormanların korunmasının giderek önem kazandığı günümüzde Atlas dergisi de yeni bir adım atıyor ve Eylül 2023 sayısından itibaren okurlarının karşısına yepyeni bir kağıtla çıkıyor. Derginin iç sayfalarında kullanılan yeni kağıdın en önemli özelliği tamamen geri dönüştürülmüş malzemeden elde edilmesi, ayrıca geliştirilmiş standartları ve gramajıyla derginin görsel kalitesini daha da yükseltmesi. Alman Leipa firması ürettiği kağıtlarda hammadde olarak yüzde 100 atık kağıt kullanıyor, firma bu yolla yılda bir buçuk milyon tondan fazla geri kazanılmış kağıdı tekrar değerlendiriyor."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 64,
+                "preview": "https://www.atlasdergisi.com/atlas-rotalari/adalara-kacis-2.html"
+              },
+              "text": {
+                "type": "str",
+                "len": 15433,
+                "preview": "Otomobillerden, yüksek sesten, karmaşa ve koşuşturmacadan uzakta, mavi sular, altın kumsallar ve geceleri yıldızlarla çevrili koylarda tatil yapmak isteyenlere mükemmel bir kaçış rotası: Beş ada; Gökçeada, Bozcaada, Marmara Adası, Avşa ve Paşalimanı. Ege'nin açık sularında el değmemiş koyları, göz alabildiğince uzanan kalabalıktan uzak plajları, eski Rum köyleri, zeytinlikleri ve şelaleleri ile Gökçeada, ada tatili yapmak isteyenler için her açıdan zengin bir tercih. Çanakkale il merkezinden 32, Gelibolu Yarımadası'ndaki Kabatepe Limanı'ndan 14 deniz mili uzaklıkta. Türkiye'nin en büyük adasının, yüzölçümü 289."
+              }
+            }
+          ]
+        },
+        "Havadis": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 1870.3,
+            "url": 87.1
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1870.3,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 69,
+                "preview": "https://www.cnnturk.com/ajanda/1-karat-kac-gramdir-bir-karat-kac-gram"
+              },
+              "text": {
+                "type": "str",
+                "len": 2211,
+                "preview": "1 Karat Kaç Gramdır? Bir Karat Kaç Gram? Değerli madenleri ölçmek için kullanılan bir ölçü birimi olarak karat ifade edilmektedir. Özellikle elmas başta olmak üzere pek çok değerli madeni ölçmek amaçlı önemli bir yere sahiptir. Bu doğrultuda karat ölçüm birimi aynı zamanda gram üzerinden de dönüşüm şansı vermektedir. Bu dönüşüm üzerinden bakıldığında ise bir karat 0,2 grama denk gelir. Böylece değerli taş madenlerin kütleleri hesabı yapılmak suretiyle buna uygun şekilde fiyatlandırması çıkarılır. Özellikle de güncel piyasa konusunda önemli yere sahiptir. 1 Karat Kaç Gramdır? Karat kelimesi günlük yaşamda çok sık karşılaşılan bir sözcük olarak öne çıkar."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 99,
+                "preview": "https://www.cnnturk.com/ajanda/1-yumurta-kac-gram-protein-icerir-bir-yumurtada-ne-kadar-protein-var"
+              },
+              "text": {
+                "type": "str",
+                "len": 2334,
+                "preview": "1 Yumurta Kaç Gram Protein İçerir? Bir Yumurtada Ne Kadar Protein Var? Protein bakımından zengin yiyecekleri ön plana çıktığında bu konuda yumurta ön sıralarda yer alır. Hem uygun maliyeti hem de kolayca tüketimi ile birlikte et ve tavuğa göre daha fazla tercih edilmektedir. Çünkü kırmızı et ile tavuk gibi önemli oranda protein irtibatı sağladığını söylemek mümkün. Bu doğrultuda 100 gram üzerinden ele alındığında yumurta 13 gram protein sağlar. Tabii bu durum ortalama üzerinden bir yumurta ile alındığında 6,5 gram ettiğini söylemek gerekir. 1 Yumurta Kaç Gram Protein İçerir? Yumurta en sevilen ve aynı zamanda en çok tüketilen sağlıklı besin kaynakları içerisinde yer alır."
+              }
+            }
+          ]
+        },
+        "KulturHaritasi": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 5873.6,
+            "url": 55.7
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 5873.6,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 65,
+                "preview": "https://1001dizi.net/yazi-2017nin-dizilerini-degerlendirdiler-637"
+              },
+              "text": {
+                "type": "str",
+                "len": 16150,
+                "preview": "Binbir Tv yazarları Işınla Bizi Scotty ve Uzun Çorap, 2017'nin dizilerini değerlendirdi. UÇ: Hımmm. Güzel bir bakış açısı. 2017 yılını şöyle bir düşündüğümde \"Aman süper\" diyemediğimi fark ettim. Fakat tek tek dizilerin üstünden geçerken belki unuttuklarımı hatırlarım, fikrim değişir. Bana diziler bakımından çok güçlü bir yıl gibi gelmedi. Bu yıla damga vuran diziye gelince... Dizilere şöyle bir bakıyorum, bir sürü kısa ömürlü dizi olmuş. Hem de çok. Senenin ilk çeyreğinde başlayıp halen süren 5 dizi var. İstanbullu Gelin, Fazilet Hanım ve Kızları, Fi, Payitaht ve Yeni Gelin... 13 dizi bitmiş. Fi'yi de dışarıda tutabiliriz çünkü reyting rekabetinde değil."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 51,
+                "preview": "https://1001dizi.net/yazi-acik-hava-hapishanesi-412"
+              },
+              "text": {
+                "type": "str",
+                "len": 7806,
+                "preview": "Onur intihar etti. Alper Berna'yı evden kovdu. Çiçek'ten Berna'nın kendisi ve Leyla hakkında Çiçek'i doldurduğunu öğrendi. Ayla Nezihe'nin Canan olduğunu öğrendi. Alper ve Hakverdi, Leyla'ya tatile çıkalım diye baskı yapan Haşmet'i bertaraf etmek için şef Gürkan'ın cesedini buldular ve polise ihbar ettiler. Leyla Simge'nin Canan'a giysi odası videosuyla şantaj yaptığını öğrendi ve Simge'nin bilgisayarından videoyu sildi. Simge hamile kalmak için Akrokent'in fotoğrafçısıyla birlikte oldu. Burak'a o akşam çektiği fotoları gönderdi. Berna Haşmet'e Leyla ve Alper'in sevgili olduğunu söyledi. Bana Sevmeyi Anlat çok sağlam bir hikayeyle ilerliyor."
+              }
+            }
+          ]
+        },
+        "MasalMasal": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 2147.0,
+            "url": 78.2
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 2147.0,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 54,
+                "preview": "https://www.kocamanbisite.com/anne-sagligi/dis-gebelik"
+              },
+              "text": {
+                "type": "str",
+                "len": 5674,
+                "preview": "Dış gebelik, döllenen yumurtanın sağlıklı ve doğru bir şekilde rahim içerisinde endometriyum tabakasına tutunamaması sonucu meydana gelen durumdur. Döllenen yumurta rahim dışında herhangi bir yere tutunursa buna dış gebelik / ektopik gebelikdenilmektedir. Dış gebelik durumu anne adaylarının hayatını riske sokacağı için bir an önce sonlandırılması gereken bir sağlık sorunudur. Anne adayına yapılan kan tahlilleri ve bazı testler sonucunda belirlenen hamilelik durumu her zaman sağlıklı bir şekilde ilerleyip sürecek anlamına gelmemektedir. Döllenen yumurtanın rahim ağzı veya fallop tüpleri içerisine bazı durumlarda ise karın içi vb."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 85,
+                "preview": "https://www.kocamanbisite.com/anne-sagligi/dogum-sonrasi-annelerin-bilmesi-gerekenler"
+              },
+              "text": {
+                "type": "str",
+                "len": 4553,
+                "preview": "Haftalarca ve aylarca süren bekleyişinizin ardından dünyanın en büyük mucizesini kucağınıza aldığınızda bu heyecana Anne sıfatını da ekliyorsunuz. Yeni doğan bebeğinizin getirmiş olduğu mutluluk yanında büyük sorumluluklar da getiriyor. Ama merak etmeyin. Bilmeniz gereken her şeyi sizinle paylaşacağız. Doğum sonrası dönem, bebeğin doğumuyla başlar ve annenin vücudu neredeyse hamilelik öncesi durumuna döndüğünde sona erer. Bu dönem çoğunlukla altı-sekiz hafta sürer. Doğum sonrası dönem, annenin yeni bir anne olmanın gerektirdiği tüm değişikliklerle nasıl başa çıkacağını öğrenirken hem duygusal hem de aynı zamanda fiziksel olarak birçok değişiklikten geçmesini içerir."
+              }
+            }
+          ]
+        },
+        "Perdearkasi-Yorumlar": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 7667.8,
+            "url": 76.7
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 7667.8,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 59,
+                "preview": "https://www.cinerituel.com/2017-yilinin-en-iyi-10-tv-dizisi"
+              },
+              "text": {
+                "type": "str",
+                "len": 6464,
+                "preview": "Bir süredir televizyonun altın çağını yaşıyoruz. Cesur senaryolar, yüksek bütçeler ve star oyuncular ile çekilen diziler, izleme alışkanlığını tamamen değiştiren dijital platformlar aracılığıyla seyircilere ulaşıyor. Artık alışılmışın dışında bir deneyime dönüşmüş dizi sektörü gerek temaları gerekse ele aldığı konuları anlatma kalitesiyle izleyicilerin izleme alışkanlıklarını yeniden yapılandırılıyor. Bu çerçevede televizyon hiç olmadığı kadar güncel ve değerli. İşte 2017 Yılının En İyi 10 TV Dizisi: - Twin Peaks: Return Televizyon dizilerindeki süregelen anlatıyı kökten değiştiren İkiz Tepeler 1990 yılında yayına başladı."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 55,
+                "preview": "https://www.cinerituel.com/2017-yilinin-en-iyi-20-filmi"
+              },
+              "text": {
+                "type": "str",
+                "len": 19727,
+                "preview": "Cineritüel yazarları 2017 yılı içerisinde ülkemizde vizyon yüzü gören filmler içerisinden en iyi 20 filmi belirledi. Yazarların kişisel listelerinde ortak bulunan filmlere göre oluşan listenin sıralamasında en çok oyu alan sıralamada kendisine yer buldu. Blade Runner 2049 ve Dunkirk filmlerinin puanları aynı olduğundan listemizde iki tane 20 numaralı film var bu sene. İşte Cineritüel'in 2017 en iyi 20 film seçkisi! - Manchester By The Sea / Yaşamın Kıyısında Kenneth Lonergan Kenneth Lonergan'ın üçüncü filmi Manchester by the Sea, hem metinsel açıdan hem de film dili, üslubu ve biçimi açısından patetik sıfatı ile bir yaşama uğraşı hikayesi yaratma konusunda önemli bir başarı kaydeder."
+              }
+            }
+          ]
+        },
+        "PopulerBilim": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 4967.7,
+            "url": 57.9
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 4967.7,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 36,
+                "preview": "https://www.acikbeyin.com/20-yasima/"
+              },
+              "text": {
+                "type": "str",
+                "len": 5516,
+                "preview": "Tam da bir ay kadar önce Turgut Özal'ın ölüm haberini gazetede okuduğun anı şimdi bile hatırlıyorum. Politikaya yeni yeni ısınmamıza rağmen önemli bir şeyler olduğunu sezmişiz sanırım. Cafe Yelken miydi oranın adı? Ilık ve güneşli, Karadeniz baharının bir günüydü. Babamızın arkadaşı Ziver'i hatırlar mısın? Sen ortaokuldayken İskenderun gezisinde tanışmıştın. Çocuk olmana rağmen kendisine Ziver diye hitap etmen konusunda ısrar etmişti. Önce çok bocalamış sonra da sendeki hissini çok sevmiştin. Henüz amca, abi, bey olmadığın için başlamamışsındır ama sen de kendine hep MustafaCan denmesini isteyeceksin."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 56,
+                "preview": "https://www.acikbeyin.com/21-gunde-aliskanlik-safsatasi/"
+              },
+              "text": {
+                "type": "str",
+                "len": 1797,
+                "preview": "Bu yazının başlığını aslında 21 Günde Alışmak Safsatası olarak belirlemiştim. Sonra Google'da arama yaptım; bununla ilgili size biraz istatistik vereyim. 21 günde alışmak diye arattığımda 1 milyon 360 bin sonuç bulundu. Vay! Biraz daha incelikli arama yapmak için 21 günde alışmak diye tırnak içinde arattığımda sadece iki sonuç geldi. Bunun üzerine 21 günde alışkanlık diye arattım: Tırnaksız yaklaşık 6 milyon sonuç, tırnak içinde ise 1.180 sonuç bulundu. Bu noktada yazının başlığına dönüp 21 Günde Alışkanlık Safsatası olarak değiştirdim. Neyse ki Google, ilk sonuçların az aşağısında kullanıcılar şunları da sordu diye bir şey getiriyor."
+              }
+            }
+          ]
+        },
+        "Serzenisler": {
+          "fields": {
+            "url": "str",
+            "text": "str",
+            "title": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 572.5,
+            "url": 72.5,
+            "title": 48.7
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 572.5,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 70,
+                "preview": "https://www.sikayet.com/vodafone-ankara-etimesgutta-telefonum-cekmiyor"
+              },
+              "text": {
+                "type": "str",
+                "len": 464,
+                "preview": "Vodafone yıllardır iletişim olmayan, cep telefonu çekmeyen Ankara'nın köyünden bir haber. Ankara'da Etimesgut Belediyesi sınırları içerisinde olan Fevziye köyünde Vodafone cep telefonları hiç çekmiyor. Sanki çekmiyor. Sanki Ankara'da değil de Hakkari'de bir köyde. Vodafone iletişim gücü çok güçlü reklamlarına inat ve köye gitmekten hele de bu çağda. Vodafone iletişim gücü çok güçlü reklamlarına inat. Yillardir kim çözecek diye hala bekliyoruz. Ayip değil mi .!"
+              },
+              "title": {
+                "type": "str",
+                "len": 47,
+                "preview": "VODAFONE Ankara Etimesgut'ta Telefonum Çekmiyor"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 60,
+                "preview": "https://www.sikayet.com/zeplin-car-rental-firma-sorumsuzlugu"
+              },
+              "text": {
+                "type": "str",
+                "len": 251,
+                "preview": "Rezervasyonum onaylanıp mail geldikten sonra Balıkesir Bandırma bölgesindeki ofisten araç teslim alamadık. Kurumsal kimlik namına hiç bir şey yok, tamamen fiyasko. Tavsiyem bu firmaya güvenip kesinlikle plan yapmayın, mağdur olmanız çok büyük ihtimal."
+              },
+              "title": {
+                "type": "str",
+                "len": 36,
+                "preview": "ZEPLİN CAR RENTAL Firma Sorumsuzluğu"
+              }
+            }
+          ]
+        },
+        "SusluTrendler": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 2344.1,
+            "url": 86.5
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 2344.1,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 69,
+                "preview": "https://www.elle.com.tr/extra/dergi/elle-aralik-sayisi-cikti-12-22-22"
+              },
+              "text": {
+                "type": "str",
+                "len": 1153,
+                "preview": "Sevilen oyuncu Serenay Sarıkaya ile gerçekleştirdiğimiz moda çekiminde, zamansız şıklığı ve ışıltıyı bir araya getirdik. 2024'ü #MagnificentWonders kampanyasıyla mucizeler ve harikalar diyarında karşılayan Bulgari'nin çok özel mücevherlerini sezonun heykelimsi formlarıyla buluşturduk ve Serenay'ın varlığını senenin yıldızı siyah-beyaz dengesiyle ikonikleştirmek istedik. Aralık sayımızda ayrıca, TikTok'un makyaj devrimi, sekiz şık Fransız moda markasının başarı dolu hikayeleri, Teknoloji ve Gelecek Danışmanı Elif Çetin'den, sektörlerden kişisel görüşlere, sizi şaşırtacak detaylarla 2024 beklentilerini bulabilirsiniz."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 79,
+                "preview": "https://www.elle.com.tr/extra/gezi/emaar-kendi-masalinizi-yasamaya-davet-ediyor"
+              },
+              "text": {
+                "type": "str",
+                "len": 1905,
+                "preview": "Aralık ayın boyunca her Cumartesi ve Pazar günü Emaar'da her yerden sürpriz bir şekilde karşınıza çıkacak ve eşi benzeri görülmemiş Dev Kurabiye Adamlar! Üstelik bu kurabiye görünümlü eğlenceli karakterlerimiz, kendileri gibi harika görüntü ve lezzette ikramlarını ücretsiz bir şekilde Emaar ziyaretçilerine dağıtacaklar ve ağızlar kurabiye adamların kurabiyeleri ile tatlanacak. Yılbaşı ruhunun uyandırdığı, yaratıcılığın ortaya çıkacağı renkli atölyeler. Birbirinden yaratıcı ve eğlenceli atölyeler de Emaar yeni yıl masalında. Emaar misafirleri bu keyifli atölyelerde ücretsiz bir şekilde hem yaratıcılıklarını ortaya çıkarmayı deneyimleyecekler, hem de atölyelerde yaptıkları çalışmalar kendilerinde Emaar'dan bir hatıra olarak kalacak."
+              }
+            }
+          ]
+        },
+        "TeknoYazilar": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 2421.0,
+            "url": 74.7
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 2421.0,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 61,
+                "preview": "https://www.cepkolik.com/0850-220-0000-kimin-numarasi-267426/"
+              },
+              "text": {
+                "type": "str",
+                "len": 3462,
+                "preview": "Teknoloji ne kadar gelişse ve ne kadar hayatımızı kolaylaştırsa da beraberinde tehlikeleri de getirmeye devam ediyor. Teknolojinin neden olduğu tehlikeler içerisinde en öne çıkanları ise dolandırıcılar. Sürekli olarak yeni bir dolandırıcılık yöntemiyle karşı karşıya kalıyoruz. Son dönemde en sık kullanılan yöntem ise sahte numaralardan arayarak, kullanıcı bilgilerini ele geçirmek. Bu yazımızda da benzer şekilde kullanıcıların bilgilerini elde etmek için kullanılan 0850 220 0000 numarasından söz edeceğiz. Kullanıcılardan gelen mesajlara göre değerlendirme yapacak olursak, 0850 220 0000 numarası kullanıcıların bilgileri almak adına aramalar gerçekleştiriyor."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 86,
+                "preview": "https://www.cepkolik.com/0xc0000142-hatasi-nedir-nasil-cozulur-resimli-anlatim-376702/"
+              },
+              "text": {
+                "type": "str",
+                "len": 5878,
+                "preview": "0xc0000142 hatası, seçili herhangi bir programın ilk çalıştırma aşamasında yaşanan ve programa erişimin kısıtlanmasına neden olan bir hatadır. Windows kullanıcıları bu hata ile karşılaştıkları zaman, hangi programı açmak istiyorsa istesinler program bir uyarı verecek ve sonrasında başlatılmadan kapanacaktır. Şunu düşünebilirsiniz, bu hata hangi uygulamalar ve oyunlarda yaşanıyor. Oyun ve uygulama isimleri vermemiz mümkün değil çünkü herhangi bir programda ya da herhangi bir oyun açılırken hatayı alabilirsiniz. Bir süreden sonra ciddi derecede can sıkıcı hale gelmeye ve programlara erişim sorunu yaşamanıza neden olan hata için çözüm yok değil."
+              }
+            }
+          ]
+        },
+        "ViralMedya": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 4236.1,
+            "url": 92.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 4236.1,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 52,
+                "preview": "https://eksiseyler.com/0-faktoriyel-neden-1e-esittir"
+              },
+              "text": {
+                "type": "str",
+                "len": 3009,
+                "preview": "0 Faktöriyel Neden 1'e Eşittir? 0 faktöriyelin 1'e eşit olması... permütasyon ve kombinasyon ile açık ve anlaşılır şekilde ispat ve izah edilebilirdir. konuya dönersek... işaret fonksiyonu gibi özel durumlarda da 0! \"tanım\" gereği 1 değerini verebiliriz. taban değeri sıfırdan büyük olan sayıların kuvvetleri sıfıra yaklaştığında, sayının değeri 1 e yaklaşır. örneğin hesap makinesinde bir pozitif sayının sürkeli karekökününü alırsanız sayının kuvveti sıfıra sayı ise 1 e yaklaşır. n elemanlı bir kümenin n elemanlı 1 tane alt kümesi vardır o da kendisidir. şimdi. * = (n!/n! ! dir. *n! sadeleşir. * 1/ !"
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 47,
+                "preview": "https://eksiseyler.com/0-rakamini-ilk-kim-buldu"
+              },
+              "text": {
+                "type": "str",
+                "len": 5448,
+                "preview": "0 Rakamını İlk Kim Buldu? sıfır rakamı, insanlık tarihinde uzunca bir süre kullanılmamış. şimdiye baktığımızdaysa sıfır rakamı olmadan işlem yapılması olanaksız. peki sıfırı gerçekten harezmi mi buldu? ya da diğer bilinen olarak yunanlar mı? bunu bulmak için yapılan birçok araştırma olmuş ve sonucunda sıfırı ne harezmi'nin, ne de yunanlıların bulduğu ortaya çıkmış. peki nasıl ve kimler tarafından bulunmuş? asırlar önce insanlar gündelik hayatlarında hesaplamalar yapma ihtiyacı hissetti. önce hepimizin çokça yaptığı gibi parmaklar kullanıldı, bu yöntem büyük hesaplamalarda yeterli gelmedi ve insanlar bu değerler için şekiller üretmeye başladı."
+              }
+            }
+          ]
+        },
+        "YazarinKaleminden": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 4321.6,
+            "url": 54.3
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 4321.6,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 56,
+                "preview": "https://kitapdiyari.com.tr/arastirma-tarih/afrikali-leo/"
+              },
+              "text": {
+                "type": "str",
+                "len": 4587,
+                "preview": "Harun: Fas'ta Hasan'la arkadaş olup güzel günler geçiren ve daha sonra Hasan'ın kardeşi Meryem'i kaçıran Hasan'ın sevdiği dostudur. Meryem: Zervali adında yaşlı bir tüccar ile evlenmek üzereyken kardeşinin çabaları sonucu evlenmekten kurtulup bir süre hasta haneye kapatılan Hasan'ın üvey kız kardeşidir. Hiba: Fas Kralı tarafından Hasan'a hediye edilen köle kızdır. Hasan görür görmez aşık olur ve bu aşk Hasan Fas'tan ayrılıncaya dek devam eder. Nur: Kahire'de hasan şehri gezerken tanıştığı Çerkez bir kızdır. Ayrıca Yavuz Sultan Selim'in yeğeni Alaaddin'in dul eşidir. İkisi arasında çok kısa bir zamanda aşk başlıyor ve evleniyorlar."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 54,
+                "preview": "https://kitapdiyari.com.tr/arastirma-tarih/beyaz-kale/"
+              },
+              "text": {
+                "type": "str",
+                "len": 2716,
+                "preview": "İtalyan Köle: Aklın, sağduyu ve bilimin temsilcisi olan kişidir. Osmanlı tarafından ele geçirilmiş tutsak edilmiştir. Hoca lakaplı bilim adamına çalışmalarında yardımcı olmuştur. Hoca: İtalyan köle kimliğine bürünerek Batı'ya kaçıp Batı'ya yerleşmiş kişidir. Osmanlı alimidir. Toplumu değiştirecek bilimsel projelerin peşinden koşar. İcat ettiği silahın çamura saplanıp başarısızlıkla sonuçlanacak bir savaştan sonra öldürülmesinden korkarak Batı'ya yerleşmiştir. Osmanlı İmparatorluğu tarafından esir alınan İtalyan bir köle ile yaşadıkları olaylar sonucunda Hoca lakaplı bir alimin yerlerinden edilmesi ve benzerlikleri romanın konusunu oluşturur."
+              }
+            }
+          ]
+        }
+      }
+    },
+    "akademik": {
+      "repo": "turkish-nlp-suite/AkademikDerlem",
+      "configs": {
+        "makaleler": {
+          "fields": {
+            "dergi_ismi": "str",
+            "title": "str",
+            "url": "str",
+            "pdf_url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 20747.2,
+            "title": 96.3,
+            "url": 59.6,
+            "pdf_url": 56.8,
+            "dergi_ismi": 40.4
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 20747.2,
+          "previews": [
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 28,
+                "preview": "IBAD Sosyal Bilimler Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 97,
+                "preview": "Gündelik Hayatta Benlik Sunumunun Dijital Oyunlar Üzerinden İncelenmesi “The Sims 4 Oyunu Örneği”"
+              },
+              "url": {
+                "type": "str",
+                "len": 55,
+                "preview": "https://dergipark.org.tr/tr/pub/ibad/issue/51777/673440"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 57,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/1000045"
+              },
+              "text": {
+                "type": "str",
+                "len": 35612,
+                "preview": "le, bireyler toplumsal iletişimde etrafındakileri etkilemek ve izlenim yönetmek için roller edinmektedirler. Bu roller gereği performanslarını sergilemekte ve bu sergileme için maskeler kullanmaktadırlar. Bu maskeler birey için birer benliğe dönüşmektedir; Çünkü bireyler ayrı ortamlarda ayrı amaçlarla ayrı ayrı roller oynamak durumunda kalmaktadırlar. 2. GÜNDELİK YAŞAMDA BENLİK SUNUMU VE DİJİTAL OYUNLAR İnsanlık iletişim kurmak, kendini ifade etmek, diğerleri tarafından da anlaşılır olmak için çok farklı yollar denemiştir. Bütün çabaları daha çok bireylerarasında kalmıştır. Değişen teknoloji ve gelişim gösteren hayat koşulları insana farklı kapıları aralamıştır."
+              }
+            },
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 20,
+                "preview": "Akdeniz İİBF Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 74,
+                "preview": "11. Kalkınma Planı Çerçevesinde Sektörel CO2 Salımı Değerleri Projeksiyonu"
+              },
+              "url": {
+                "type": "str",
+                "len": 58,
+                "preview": "https://dergipark.org.tr/tr/pub/auiibfd/issue/57842/701344"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 57,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/1000049"
+              },
+              "text": {
+                "type": "str",
+                "len": 27315,
+                "preview": "Karbon salımı son yıllarda artış göstermekte ve küresel ısınmanın en önemli sebeplerinden biri olarak gösterilmektedir. Türkiye karbon salımının temel nedeni ise enerji sektöründeki kullanımlardır. Bu çalışmada girdi çıktı tablosu ile hedef programlama modeli kurulmuştur. Uygulamada 11. Kalkınma Planı çerçevesinde sektörel enerji kullanımları ve CO2 salımları araştırılmıştır. RAS yöntemi kullanılarak 2012 girdi çıktı tablosu 2017 yılına güncellemiştir. Hedef programlama modelinde 2021,2022 ve 2023 yılları için GSYH değerleri hedef olarak alınmıştır. Programlamada yer alan kısıtlar; işgücü, sabit sermaye kullanımı, arz ve talep tutarları ve katsayılarıdır."
+              }
+            }
+          ]
+        },
+        "akademik-ozetler": {
+          "fields": {
+            "dergi_ismi": "str",
+            "title": "str",
+            "url": "str",
+            "pdf_url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 1365.4,
+            "title": 88.4,
+            "url": 59.9,
+            "pdf_url": 57.0,
+            "dergi_ismi": 32.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1365.4,
+          "previews": [
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 32,
+                "preview": "19 Mayıs Sosyal Bilimler Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 110,
+                "preview": "Örgütsel Güvenin, Örgütsel Bağlılık ve İşten Ayrılma Niyeti ile İlişkisinin Meta Analiz Yöntemiyle İncelenmesi"
+              },
+              "url": {
+                "type": "str",
+                "len": 60,
+                "preview": "https://dergipark.org.tr/tr/pub/19maysbd/issue/82162/1351409"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 57,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/3368634"
+              },
+              "text": {
+                "type": "str",
+                "len": 938,
+                "preview": "Bu çalışmada, örgütsel güvenin, örgütsel bağlılık ve işten ayrılma niyeti ile yakın bir ilişkiye sahip olduğu varsayılarak, aralarındaki ilişkinin gücünün ve yönünün karşılaştırmalı olarak analiz edilerek sonuçların ortaya konulması amaçlanmıştır. Varsayımın test edilmesi amacıyla nicel bir yöntem olan meta analiz uygulanmış, etki büyüklüğü değeri elde edebilmek amacıyla, Pearson (r) ve örneklem (n) değerleri kullanılmıştır. Yapılan taramada 141 çalışmaya ulaşılmış, seçim kıstaslarına uygun olan 84 çalışma analize dahil edilmiştir. Örgütsel güven ile örgütsel bağlılık arasında ES=0.55 değerinde güçlü ve pozitif, örgütsel güven ile işten ayrılma niyeti arasında ES=-0."
+              }
+            },
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 32,
+                "preview": "19 Mayıs Sosyal Bilimler Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 56,
+                "preview": "Sosyal Medyada Taraftar Grupları: Söylemler ve Temsiller"
+              },
+              "url": {
+                "type": "str",
+                "len": 60,
+                "preview": "https://dergipark.org.tr/tr/pub/19maysbd/issue/82162/1364495"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 57,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/3425614"
+              },
+              "text": {
+                "type": "str",
+                "len": 1173,
+                "preview": "Kültür ve popüler kültür kavramlarının yakından ilişkili olduğu olgular arasında spor ve özellikle futbol yer almaktadır. Futbolun yaygınlığının oluşturduğu güç onu bir endüstriye dönüştürerek, izleyici, taraftar ve holigan gibi kavramlar da yaratmıştır. Taraftar kavramının ise bugün geldiği noktada sosyal medya ile ilişkisi dikkat çekmektedir. Sosyal medya günümüzde taraftarın buluştuğu en popüler sosyal ortam olma özelliğiyle taraftar kültürünü en iyi yansıtan yerlerden biri haline gelmiştir. Bu çalışma popüler kültür, futbol ve taraftar ile sosyal medya kavramlarının aralarındaki ilişkiyi incelemeyi amaçlamaktadır."
+              }
+            }
+          ]
+        },
+        "medikal-makaleler": {
+          "fields": {
+            "dergi_ismi": "str",
+            "title": "str",
+            "url": "str",
+            "pdf_url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 4849.5,
+            "title": 79.2,
+            "url": 56.8,
+            "pdf_url": 56.3,
+            "dergi_ismi": 26.1
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 4849.5,
+          "previews": [
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 30,
+                "preview": "Akademik Araştırma Tıp Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 69,
+                "preview": "İntihar Amaçlı Yüksek Doz Metformin Alan Olguların Değerlendirilmesi"
+              },
+              "url": {
+                "type": "str",
+                "len": 55,
+                "preview": "https://dergipark.org.tr/tr/pub/aatd/issue/48731/468413"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 56,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/808183"
+              },
+              "text": {
+                "type": "str",
+                "len": 4166,
+                "preview": "Metformin insülin duyarlılığını artırarak etki gösteren ve diabetes mellitus tedavisinde çok yaygın olarak kullanılan oral antidiyabetiklerdendir. Güvenilir bir oral antidiyabetik olmasına rağmen uygunsuz kullanımı halinde çok ciddi yan etkilere yol açabilmektedir. Bu yan etkilerin başında laktik asidoz ve böbrek yetmezliği gelmektedir. Metformine bağlı laktik asidoz tablosu, böbrek veya karaciğer fonksiyon bozukluğu ya da enfeksiyon gibi eşlik eden bir durum yoksa genellikle ilacın yüksek dozda alınmasına bağlıdır. İntihar amaçlı ilacın yüksek dozda alınmasıyla ortaya çıkan ciddi laktik asidoz ve böbrek yetmezliği tablosu ölümcül olabilmektedir."
+              }
+            },
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 30,
+                "preview": "Akademik Araştırma Tıp Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 67,
+                "preview": "Tiroid Piramidal Lob İnsidansı ve Tiroid Fonksiyonları İle İlişkisi"
+              },
+              "url": {
+                "type": "str",
+                "len": 55,
+                "preview": "https://dergipark.org.tr/tr/pub/aatd/issue/48731/541233"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 56,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/808186"
+              },
+              "text": {
+                "type": "str",
+                "len": 4574,
+                "preview": "Tiroid bezi dördüncü embriyonal haftada, dilin arka kısmında konumlanan foramen çekumdan köken alarak boyun ön kısmındaki anatomik lokalizasyonuna doğru göç etmeye başlar. Yedinci haftada hedeflenen anatomik lokalizasyona ulaşır. Bu iki bölge arasındaki bağlantıyı tiroglossal kanal sağlar ve bu kanal göç tamamlandıktan sonra atrofiye uğrar. Tiroglossal kanalın kaudal ucu kaybolmadan kalırsa piramidal lob meydana gelir. Piramidal lob sıklığı, seçilen çalışma popülasyonu ve tespit yöntemine göre değişmekle birlikte oldukça sık görülen bir varyasyondur. Yapılan çeşitli çalışmalarda, sıklığı %12 ile %75 arasında değişen oranlarda tespit edilmiştir."
+              }
+            }
+          ]
+        },
+        "medikal-ozetler": {
+          "fields": {
+            "dergi_ismi": "str",
+            "title": "str",
+            "url": "str",
+            "pdf_url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 1259.5,
+            "title": 78.8,
+            "url": 56.4,
+            "pdf_url": 56.2,
+            "dergi_ismi": 26.9
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 1259.5,
+          "previews": [
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 30,
+                "preview": "Akademik Araştırma Tıp Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 69,
+                "preview": "İntihar Amaçlı Yüksek Doz Metformin Alan Olguların Değerlendirilmesi"
+              },
+              "url": {
+                "type": "str",
+                "len": 55,
+                "preview": "https://dergipark.org.tr/tr/pub/aatd/issue/48731/468413"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 56,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/808183"
+              },
+              "text": {
+                "type": "str",
+                "len": 1811,
+                "preview": "Metformin güvenilir bir oral antidiyabetik olmakla birlikte yüksek dozda alınmasıyla ortaya çıkabilen laktik asidoz ve böbrek yetmezliği tablosu ölümcül olabilir. Bu çalışmada intihar amacıyla metformin alan olguların klinik seyri tartışılmıştır. Eylül 2009-Mayıs 2017 tarihleri arasında kliniğimizde takip edilen, intihar amaçlı yüksek doz metformin alan olgular değerlendirildi. Demografik verileri, biyokimya sonuçları, klinik seyirleri ve tedavileri dosyalarından kaydedildi. Toplam 15 olgunun 10 tanesi kadın, 5 tanesi erkekti. Medyan yaş kadınlarda 34 yıl (18-68), erkeklerde 38 yıl (23-58) saptandı."
+              }
+            },
+            {
+              "dergi_ismi": {
+                "type": "str",
+                "len": 30,
+                "preview": "Akademik Araştırma Tıp Dergisi"
+              },
+              "title": {
+                "type": "str",
+                "len": 67,
+                "preview": "Tiroid Piramidal Lob İnsidansı ve Tiroid Fonksiyonları İle İlişkisi"
+              },
+              "url": {
+                "type": "str",
+                "len": 55,
+                "preview": "https://dergipark.org.tr/tr/pub/aatd/issue/48731/541233"
+              },
+              "pdf_url": {
+                "type": "str",
+                "len": 56,
+                "preview": "https://dergipark.org.tr/tr/download/article-file/808186"
+              },
+              "text": {
+                "type": "str",
+                "len": 940,
+                "preview": "Çalışmamızda ultrasonografi ile piramidal lob sıklığını ve piramidal lob boyutları ile tiroid fonksiyon testleri arasında bir ilişki olup olmadığını tespit etmeyi amaçladık. Gereç ve Yöntem: Ekim 2015 ile ekim 2016 tarihleri arasında tiroid ultrasonografi için başvurmuş, erişkin yaş grubunda toplam 644 olgu çalışmamıza dahil edildi. Bulgular: Olgularımızın %15.2sinde (n=98) piramidal lob mevcuttu. Piramidal lob uzun boyutu ortalama 14.97±5.9 mm, kısa boyutu ortalama 3.99±5.1 mm idi. Piramidal lobu olan hastalar cinsiyete göre değerlendirildiğinde, kadın ve erkek cinsiyet arasında yaş, piramidal lob boyutları ve tiroid fonksiyonları açısından fark yoktu (p>0."
+              }
+            }
+          ]
+        },
+        "bilkent-writings": {
+          "fields": {
+            "title": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 4229.4,
+            "title": 20.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 4229.4,
+          "previews": [
+            {
+              "title": {
+                "type": "str",
+                "len": 25,
+                "preview": "DEĞİŞEN EVRENSEL BİR İKON"
+              },
+              "text": {
+                "type": "str",
+                "len": 3909,
+                "preview": "Marilyn Monroe akıllarda hep güzel sarışın olarak kaldı. Marilyn MONREO' yu bir kez de izlemek yerine okumak, tanımak, belki de böylesine güzel bir kadınla tanışmak biraz da sohbet etmek istedim. Başardım da ama bu kez onu hırçınlğıyla değil, hırçınlığının ona verdiği ızdırapla sevdim. Şaşırdım kendime; bir kadını izleyerek değil okuyarak sevdim. Kendi kendine yazdığı notlarda zayıflıklarını farkederek sevdim. Aslında onunla yalnız kalmak istemiştim. Sayfalara başlamadan önce sanatsal bir kişiliğin bana elçi olacağını tahmin edememiştim. Zaman zaman araya gireceğini hakkında her şeyi bildiğimi sandığım bir kadını yeniden tanıyacağımı düşünmek planlarım arasında değildi."
+              }
+            },
+            {
+              "title": {
+                "type": "str",
+                "len": 8,
+                "preview": "BEN ÖLÜM"
+              },
+              "text": {
+                "type": "str",
+                "len": 3721,
+                "preview": "Ben ölüm... Herkes korkar benden. Herkes tarafından dünyanın en kötü olayı olarak algılanırım. Gidenin ardından acının tarifsiz kaldığı cenazeler yapılır, benim yüzümden. İnsanlar, artık içlerine sığmayan acılarını dışa vurabilmek için yürekleri parçalayan ağıtlar yakarlar. Boğazlar düğümlenir, yutkunmak güçleşir. Gidenin acısı aylarca, yıllarca kalır geride kalanlarda. Zaman geçmek bilmez, yaşamak manasız hale gelir. Giden geminin yokluğuna bir türlü inandıramaz kendilerini limanda kalanlar. Bütün bu yaşattıklarıma rağmen, kulağınıza çok garip gelse de ben gerçekte iyi biriyim. Aslında benim bu kadar kötü algılanmamın sebebi en büyük düşmanım olan \"yaşam\"dır."
+              }
+            }
+          ]
+        }
+      }
+    },
+    "cosmos": {
+      "repo": "ytu-ce-cosmos/Cosmos-Turkish-Corpus-v1.0",
+      "configs": {
+        "default": {
+          "fields": {
+            "url": "str",
+            "text": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 4927.1,
+            "url": 64.6
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 4927.1,
+          "previews": [
+            {
+              "url": {
+                "type": "str",
+                "len": 33,
+                "preview": "https://www.haberler.com/magazin/"
+              },
+              "text": {
+                "type": "str",
+                "len": 4988,
+                "preview": "Melek Mosso ve Serkan Sağdıç anlaşmalı olarak boşandı Komedyen Özgür Turhan'ın ETİ ile anlaşmasının feshedilmesine neden olan ırkçı tweet Unutulmaz karakterleriyle hafızalara kazınan Arif Erkin Güzelbeyoğlu'nun cenaze programı belli oldu Beyazıt Öztürk geri dönüyor: Yeni sergi yolda Kalp krizi sonrası ilk gelişme! Fatih Ürek'le ilgili umut veren detay Burcu Biricik kızı Luna ile görüntülendi: Anne-kız benzerliği şaşırttı Güllü'nün kızı Tuğyan Ülkem hakkındaki iddialara son nokta konuldu Kendi şarkısını duyunca dayanamadı! Sefo bornozuyla balkona fırladı Şahika Ercümen'den Gazze'ye destek: 107 ..."
+              }
+            },
+            {
+              "url": {
+                "type": "str",
+                "len": 70,
+                "preview": "https://www.haberler.com/static/kisisel-veri-sahibi-basvuru-formu.pdf/"
+              },
+              "text": {
+                "type": "str",
+                "len": 110,
+                "preview": "Masaüstü bildirimlerimize izin vererek en son haberleri, analizleri ve derinlemesine içerikleri hemen öğrenin."
+              }
+            }
+          ]
+        }
+      }
+    },
+    "fineweb2": {
+      "repo": "HuggingFaceFW/fineweb-2",
+      "configs": {
+        "tur_Latn": {
+          "fields": {
+            "text": "str",
+            "id": "str",
+            "dump": "str",
+            "url": "str",
+            "date": "str",
+            "file_path": "str",
+            "language": "str",
+            "language_score": "float",
+            "language_script": "str",
+            "minhash_cluster_size": "int",
+            "top_langs": "str"
+          },
+          "text_field": "text",
+          "field_avg_chars": {
+            "text": 3500.4,
+            "file_path": 138.0,
+            "url": 90.3,
+            "id": 47.0,
+            "date": 20.0,
+            "dump": 15.0,
+            "language_script": 4.0,
+            "language": 3.0,
+            "top_langs": 2.0
+          },
+          "records_measured": 50,
+          "avg_chars_per_record": 3500.4,
+          "previews": [
+            {
+              "text": {
+                "type": "str",
+                "len": 485,
+                "preview": "Her türlü oyunu tek sitede arayan oyun severler; Hoşgeldiniz! Burada bol eğlenceli, hertürlü online oyunu bulabilirsin. Günlük yüklenen oyunlarımızı takip et, yeni oyunlarımızı oynayan ilk sen ol! Erkekler için yarış oyunları, spor oyunları ve/veya macera oyunları mı aradın? Tam yerindesin! Kızlar için yemek oyunları, hayvancıklar ve/veya makyaj oyunları mı aradın? Burda bulursun! Beceri oyunları, zeka oyunları ve/veya birleştirme oyunları sevenler de burada aradıklarını bulurlar!"
+              },
+              "id": {
+                "type": "str",
+                "len": 47,
+                "preview": "<urn:uuid:b4a91df5-f3fc-4e0e-9f09-694c539cd16a>"
+              },
+              "dump": {
+                "type": "str",
+                "len": 15,
+                "preview": "CC-MAIN-2013-20"
+              },
+              "url": {
+                "type": "str",
+                "len": 47,
+                "preview": "http://www.games1.com/tr/Oyun/MoonGirl_Dress_Up"
+              },
+              "date": {
+                "type": "str",
+                "len": 20,
+                "preview": "2013-05-18T23:07:19Z"
+              },
+              "file_path": {
+                "type": "str",
+                "len": 138,
+                "preview": "s3://commoncrawl/crawl-data/CC-MAIN-2013-20/segments/1368696382920/warc/CC-MAIN-20130516092622-00002-ip-10-60-113-184.ec2.internal.warc.gz"
+              },
+              "language": {
+                "type": "str",
+                "len": 3,
+                "preview": "tur"
+              },
+              "language_score": {
+                "type": "float",
+                "value": "0.9995866417884827"
+              },
+              "language_script": {
+                "type": "str",
+                "len": 4,
+                "preview": "Latn"
+              },
+              "minhash_cluster_size": {
+                "type": "int",
+                "value": "266154"
+              },
+              "top_langs": {
+                "type": "str",
+                "len": 2,
+                "preview": "{}"
+              }
+            },
+            {
+              "text": {
+                "type": "str",
+                "len": 796,
+                "preview": "Epilepsi ve Ben Resim Yarışması … Epilepsi ve Ben resim yarışması … “Epilepsi ve Ben” resim yarışması, çocuk epilepsi hastalarına sosyal destek sunmak amacıyla Türk Epilepsi ile Savaş Derneği tarafından organize edilmekte, sanofi-aventis Grup’un sponsorluğunda gerçekleştirilmektedir. Yarışmanın amacı, epilepsi konusunda farkındalığı artırmak, epilepsisi olan çocukların kendilerini ifade etmesine olanak yaratmak ve epilepsiden etkilenen bireyleri ve aileleri birleştirmektir. Resimlerin değerlendirmesi ve ödül alacak adayların belirlenmesi Türk Epilepsi ile Savaş Derneği’nin koordinasyonunda olup, sanofi-aventis Grup’tan bağımsızdır."
+              },
+              "id": {
+                "type": "str",
+                "len": 47,
+                "preview": "<urn:uuid:aaba99b6-254d-4104-afa9-bd7b9aa34801>"
+              },
+              "dump": {
+                "type": "str",
+                "len": 15,
+                "preview": "CC-MAIN-2013-20"
+              },
+              "url": {
+                "type": "str",
+                "len": 72,
+                "preview": "http://www.kuman-art.com/yarismalar/epilepsi-ve-ben-resim-yarismasi.html"
+              },
+              "date": {
+                "type": "str",
+                "len": 20,
+                "preview": "2013-05-18T23:08:01Z"
+              },
+              "file_path": {
+                "type": "str",
+                "len": 138,
+                "preview": "s3://commoncrawl/crawl-data/CC-MAIN-2013-20/segments/1368696382920/warc/CC-MAIN-20130516092622-00002-ip-10-60-113-184.ec2.internal.warc.gz"
+              },
+              "language": {
+                "type": "str",
+                "len": 3,
+                "preview": "tur"
+              },
+              "language_score": {
+                "type": "float",
+                "value": "0.9997261166572571"
+              },
+              "language_script": {
+                "type": "str",
+                "len": 4,
+                "preview": "Latn"
+              },
+              "minhash_cluster_size": {
+                "type": "int",
+                "value": "1"
+              },
+              "top_langs": {
+                "type": "str",
+                "len": 2,
+                "preview": "{}"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "failed": []
+}

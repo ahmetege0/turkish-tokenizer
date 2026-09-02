@@ -17,3 +17,6 @@ venv/
 
 # ── Colab / notebook ──
 .ipynb_checkpoints/
+
+# Toplanan korpus (HF Hub-da tutulacak)
+data/

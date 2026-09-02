@@ -1,16 +1,17 @@
 """
 Kaynak Dogrulama (probe)
 ========================
-Her veri kaynagindan SADECE ilk birkac kaydi okur ve sunlari raporlar:
-  - Repo erisilebiliyor mu, hangi config'ler var
-  - Kayitlarin alan adlari (key'leri) ve tipleri
-  - String alanlarin ornek icerigi
-  - Ortalama satir uzunlugu (kota hesabi icin)
+Her veri kaynaginin HER config'inden sadece birkac kayit okur ve raporlar:
+  - Repo/config erisilebiliyor mu
+  - Alan adlari ve TIPLERI (str / list / int ...)
+  - Metin alani hangisi (liste tipindekiler dahil)
+  - Ortalama karakter/kayit  -> kota planlamasi icin
 
 Korpus YAZMAZ, veri INDIRMEZ. Tek cikti: output/sources_probe.json
 
-Onemli: Bir kaynak patlarsa sessizce gecmez, sonda "BASARISIZ" olarak listelenir.
-(Onceki denemede ForumSohbetleri sessizce 0 satir dondurup fark edilmemisti.)
+Neden her config ayri ayri: bir config'in alan semasi digerlerinden farkli
+olabilir. Onceki denemede ForumSohbetleri'nin 'texts' alani LISTE oldugu icin
+str kontrolunden gecemedi ve 2.78M kayit sessizce kayboldu.
 
 Kullanim: python scripts/probe_sources.py
 """
@@ -24,146 +25,151 @@ from datasets import load_dataset, get_dataset_config_names
 OUT_DIR = Path("output")
 OUT_FILE = OUT_DIR / "sources_probe.json"
 
-N_PREVIEW = 3      # icerigi basilacak kayit sayisi
-N_MEASURE = 200    # ortalama uzunluk icin okunacak kayit sayisi
-PREVIEW_CHARS = 200
+N_PREVIEW = 2       # icerigi kaydedilecek kayit sayisi
+N_MEASURE = 50      # ortalama uzunluk icin okunacak kayit sayisi
+PREVIEW_CHARS = 600   # cumle sonunda kesilir, ortasinda degil
 
-# (etiket, [aday repo id'leri], istenen config veya None)
-# Aday listesi: ilki calismazsa sonraki denenir (OpenSubtitles icin gerekli).
+# (etiket, repo, configs)
+#   configs = "ALL"  -> repo'daki tum config'ler yoklanir
+#   configs = [...]  -> sadece bu config'ler (fineweb-2'de 1870 config var!)
 SOURCES = [
-    ("musteri",   ["turkish-nlp-suite/MusteriYorumlari"],                      None),
-    ("forum",     ["turkish-nlp-suite/ForumSohbetleri"],                       None),
-    ("altyazi",   ["Helsinki-NLP/open_subtitles", "open_subtitles"],           "en-tr"),
-    ("wiki",      ["turkish-nlp-suite/temiz-Wiki"],                            None),
-    ("havadis",   ["turkish-nlp-suite/Havadis"],                               None),
-    ("ozenli",    ["turkish-nlp-suite/OzenliDerlem"],                          None),
-    ("akademik",  ["turkish-nlp-suite/AkademikDerlem"],                        None),
-    ("cosmos",    ["ytu-ce-cosmos/Cosmos-Turkish-Corpus-v1.0"],                None),
-    ("fineweb2",  ["HuggingFaceFW/fineweb-2"],                                 "tur_Latn"),
+    ("musteri",   "turkish-nlp-suite/MusteriYorumlari",             "ALL"),
+    ("senti",     "turkish-nlp-suite/SentiTurca",                   "ALL"),
+    ("sinema",    "turkish-nlp-suite/BuyukSinema",                  "ALL"),
+    ("vitamin",   "turkish-nlp-suite/vitamins-supplements-reviews", "ALL"),
+    ("forum",     "turkish-nlp-suite/ForumSohbetleri",              "ALL"),
+    ("wiki",      "turkish-nlp-suite/temiz-Wiki",                   "ALL"),
+    ("havadis",   "turkish-nlp-suite/Havadis",                      "ALL"),
+    ("ozenli",    "turkish-nlp-suite/OzenliDerlem",                 "ALL"),
+    ("akademik",  "turkish-nlp-suite/AkademikDerlem",               "ALL"),
+    ("cosmos",    "ytu-ce-cosmos/Cosmos-Turkish-Corpus-v1.0",       "ALL"),
+    ("fineweb2",  "HuggingFaceFW/fineweb-2",                        ["tur_Latn"]),
 ]
 
 
-def describe_record(rec):
-    """Bir kaydin alanlarini {ad: (tip, onizleme)} olarak ozetler."""
-    out = {}
-    for k, v in rec.items():
-        if isinstance(v, str):
-            preview = v[:PREVIEW_CHARS].replace("\n", "\n")
-            out[k] = {"type": "str", "len": len(v), "preview": preview}
-        else:
-            out[k] = {"type": type(v).__name__, "value": str(v)[:80]}
-    return out
+def text_len(v):
+    """Bir alanin tasidigi toplam metin uzunlugu. Liste ise elemanlarin toplami."""
+    if isinstance(v, str):
+        return len(v)
+    if isinstance(v, list):
+        return sum(len(x) for x in v if isinstance(x, str))
+    return -1
 
 
-def pick_text_field(rec):
-    """En uzun string alani metin alani olarak tahmin eder."""
-    best, best_len = None, -1
-    for k, v in rec.items():
-        if isinstance(v, str) and len(v) > best_len:
-            best, best_len = k, len(v)
-    return best
+def clip(s):
+    """Metni PREVIEW_CHARS civarinda, ama CUMLE SONUNDA keser."""
+    s = " ".join(s.split())
+    if len(s) <= PREVIEW_CHARS:
+        return s
+    tail = s[PREVIEW_CHARS:PREVIEW_CHARS + 200]
+    cut = min((tail.find(c) for c in ".!?" if c in tail), default=-1)  # EN YAKIN cumle sonu
+    if cut != -1:
+        return s[:PREVIEW_CHARS + cut + 1]
+    sp = s.rfind(" ", 0, PREVIEW_CHARS)
+    return s[:sp if sp > 0 else PREVIEW_CHARS] + " ..."
 
 
-def probe_one(label, repo_ids, config):
-    """Tek bir kaynagi dener. Basarili olursa dict, olmazsa exception firlatir."""
-    last_error = None
+def describe(v):
+    """Bir alani {tip, uzunluk, onizleme} olarak ozetler. Listeleri de acar."""
+    if isinstance(v, str):
+        return {"type": "str", "len": len(v),
+                "preview": clip(v)}
+    if isinstance(v, list):
+        items = [x for x in v if isinstance(x, str)]
+        return {"type": "list", "n_items": len(v), "total_chars": sum(map(len, items)),
+                "avg_item_chars": round(sum(map(len, items)) / len(items), 1) if items else 0,
+                "preview": clip(items[0]) if items else ""}
+    return {"type": type(v).__name__, "value": str(v)[:80]}
 
-    for repo in repo_ids:
+
+def probe_config(repo, config):
+    """Tek bir repo+config'i yoklar. Hata olursa exception firlatir."""
+    kwargs = {"split": "train", "streaming": True}
+    if config:
+        kwargs["name"] = config
+
+    it = iter(load_dataset(repo, **kwargs))
+    previews, records = [], []
+
+    for i in range(N_MEASURE):
         try:
-            print(f"  repo deneniyor: {repo}")
+            rec = next(it)
+        except StopIteration:
+            break
+        records.append(rec)
+        if i < N_PREVIEW:
+            previews.append({k: describe(v) for k, v in rec.items()})
 
-            try:
-                configs = get_dataset_config_names(repo)
-            except Exception as e:
-                configs = []
-                print(f"    (config listesi alinamadi: {type(e).__name__})")
+    if not previews:
+        raise RuntimeError("stream acildi ama hic kayit gelmedi")
 
-            if configs:
-                print(f"    mevcut config'ler ({len(configs)}): {configs[:15]}")
+    # Metin alani: TEK kayda degil, olculen TUM kayitlarin toplamina bakarak sec.
+    # (Tek kayda bakmak yaniltir: bir yorumun urun adi, yorum metninden uzun olabilir.)
+    field_totals = {}
+    for rec in records:
+        for k, v in rec.items():
+            n = text_len(v)
+            if n >= 0:
+                field_totals[k] = field_totals.get(k, 0) + n
+    text_field = max(field_totals, key=field_totals.get) if field_totals else None
 
-            # Istenen config yoksa ilk config'e dus
-            use_config = config
-            if use_config and configs and use_config not in configs:
-                print(f"    UYARI: '{use_config}' config listesinde YOK -> '{configs[0]}' denenecek")
-                use_config = configs[0]
-            elif not use_config and configs:
-                use_config = configs[0]
-
-            kwargs = {"split": "train", "streaming": True}
-            if use_config:
-                kwargs["name"] = use_config
-
-            ds = load_dataset(repo, **kwargs)
-            it = iter(ds)
-
-            previews, lengths, text_field = [], [], None
-            for i in range(N_MEASURE):
-                try:
-                    rec = next(it)
-                except StopIteration:
-                    break
-                if i == 0:
-                    text_field = pick_text_field(rec)
-                if i < N_PREVIEW:
-                    previews.append(describe_record(rec))
-                if text_field and isinstance(rec.get(text_field), str):
-                    lengths.append(len(rec[text_field]))
-
-            if not previews:
-                raise RuntimeError("stream acildi ama hic kayit gelmedi")
-
-            avg = sum(lengths) / len(lengths) if lengths else 0
-
-            return {
-                "repo": repo,
-                "config_used": use_config,
-                "configs_available": configs,
-                "fields": sorted(previews[0].keys()),
-                "text_field_guess": text_field,
-                "records_measured": len(lengths),
-                "avg_chars_per_record": round(avg, 1),
-                "previews": previews,
-            }
-
-        except Exception as e:
-            last_error = f"{type(e).__name__}: {e}"
-            print(f"    BASARISIZ: {last_error}")
-
-    raise RuntimeError(last_error or "bilinmeyen hata")
+    return {
+        "fields": {k: previews[0][k]["type"] for k in previews[0]},
+        "text_field": text_field,
+        "field_avg_chars": {k: round(v / len(records), 1) for k, v in sorted(
+            field_totals.items(), key=lambda kv: -kv[1])},
+        "records_measured": len(records),
+        "avg_chars_per_record": round(field_totals.get(text_field, 0) / len(records), 1),
+        "previews": previews,
+    }
 
 
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     results, failures = {}, {}
 
-    for label, repo_ids, config in SOURCES:
-        print(f"\n{'='*70}\n[{label}]")
+    for label, repo, want in SOURCES:
+        print(f"\n{'='*72}\n[{label}]  {repo}")
+
         try:
-            results[label] = probe_one(label, repo_ids, config)
-            r = results[label]
-            print(f"  OK  alanlar={r['fields']}")
-            print(f"      metin alani tahmini='{r['text_field_guess']}'  "
-                  f"ort={r['avg_chars_per_record']} karakter/kayit")
-            first = r["previews"][0].get(r["text_field_guess"], {})
-            print(f"      ornek: {first.get('preview', '')[:150]}")
-        except Exception:
-            failures[label] = traceback.format_exc(limit=2)
-            print(f"  >>> {label} PROBE EDILEMEDI")
+            configs = get_dataset_config_names(repo)
+        except Exception as e:
+            configs = []
+            print(f"  config listesi alinamadi: {type(e).__name__}: {e}")
+
+        todo = configs if want == "ALL" else want
+        if not todo:
+            todo = [None]
+        print(f"  yoklanacak config ({len(todo)}): {todo if len(todo) <= 12 else todo[:12]}")
+
+        results[label] = {"repo": repo, "configs": {}}
+
+        for cfg in todo:
+            name = f"{label}/{cfg}" if cfg else label
+            try:
+                r = probe_config(repo, cfg)
+                results[label]["configs"][str(cfg)] = r
+                types = ", ".join(f"{k}:{v}" for k, v in r["fields"].items())
+                print(f"    OK  {str(cfg):<24} alan[{types}]")
+                print(f"        metin='{r['text_field']}'  ort={r['avg_chars_per_record']:,.0f} kar/kayit")
+            except Exception:
+                failures[name] = traceback.format_exc(limit=2)
+                print(f"    >>> BASARISIZ: {name}")
 
     OUT_FILE.write_text(
-        json.dumps({"ok": results, "failed": list(failures)}, ensure_ascii=False, indent=2),
+        json.dumps({"ok": results, "failed": sorted(failures)}, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
 
-    print(f"\n{'='*70}")
-    print(f"BASARILI ({len(results)}): {list(results)}")
-    print(f"BASARISIZ ({len(failures)}): {list(failures)}")
-    for label, tb in failures.items():
-        print(f"\n--- {label} ---\n{tb}")
-    print(f"\nRapor: {OUT_FILE}")
-
+    n_ok = sum(len(v["configs"]) for v in results.values())
+    print(f"\n{'='*72}")
+    print(f"BASARILI config sayisi : {n_ok}")
+    print(f"BASARISIZ config sayisi: {len(failures)}")
+    for name, tb in failures.items():
+        print(f"\n--- {name} ---\n{tb}")
+    print(f"Rapor: {OUT_FILE}")
     if failures:
-        print("\nDIKKAT: Basarisiz kaynaklar var. Cekmeye baslamadan once cozulmeli.")
+        print("\nDIKKAT: Basarisiz config'ler var. Cekmeye baslamadan once cozulmeli.")
 
 
 if __name__ == "__main__":
