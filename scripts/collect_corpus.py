@@ -21,9 +21,12 @@ Kullanim:
     python scripts/collect_corpus.py                 # tam calisma (6 GB)
     python scripts/collect_corpus.py --fresh         # state'i yok say, bastan basla
 
-Colab'de gozetimsiz calisma (runtime olse de veri kalir, is bitince kapanir):
-    python scripts/collect_corpus.py \
-        --out /content/drive/MyDrive/tr-tokenizer-data --shutdown
+Colab'de gozetimsiz calisma. runtime.unassign() IPython kernel'i gerektirdigi
+icin "!python ..." alt surecinden calismaz; kapatmayi hucrenin kendisi yapar:
+
+    !python scripts/collect_corpus.py --out /content/drive/MyDrive/tr-tokenizer-data --shutdown
+    from google.colab import runtime
+    runtime.unassign()
 """
 
 import argparse
@@ -262,8 +265,22 @@ def shutdown_colab():
         print("Drive bosaltildi.")
     except Exception as e:
         print(f"Drive flush atlandi ({type(e).__name__}); Drive bagli olmayabilir.")
-    print("Colab runtime kapatiliyor.")
-    runtime.unassign()
+
+    try:
+        print("Colab runtime kapatiliyor.")
+        runtime.unassign()
+    except Exception:
+        # unassign() runtime'i IPython kernel'i uzerinden (JavaScript ile) kapatiyor.
+        # Script "!python ..." ile ALT SUREC olarak kosarsa o surecte kernel yoktur
+        # ve cagri patlar. Isin kendisi bitmis durumda; kapatmayi notebook hucresi
+        # yapmali. Cokmek yerine net talimat basiyoruz.
+        print("\n" + "=" * 66)
+        print("RUNTIME OTOMATIK KAPANAMADI: alt surecte IPython kernel yok.")
+        print("Veri Drive'a yazildi, kayip YOK. Runtime'i kapatmak icin ayni")
+        print("hucrenin sonuna su iki satiri ekle (! olmadan, Python olarak):")
+        print("    from google.colab import runtime")
+        print("    runtime.unassign()")
+        print("=" * 66)
 
 
 # ── Durum (resume) ───────────────────────────────────────────────────────────
