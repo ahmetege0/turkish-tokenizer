@@ -20,6 +20,10 @@ Kullanim:
     python scripts/collect_corpus.py --scale 0.001   # mini test (~6 MB)
     python scripts/collect_corpus.py                 # tam calisma (6 GB)
     python scripts/collect_corpus.py --fresh         # state'i yok say, bastan basla
+
+Colab'de gozetimsiz calisma (runtime olse de veri kalir, is bitince kapanir):
+    python scripts/collect_corpus.py \
+        --out /content/drive/MyDrive/tr-tokenizer-data --shutdown
 """
 
 import argparse
@@ -29,6 +33,7 @@ import os
 import re
 import sys
 import time
+import traceback
 from hashlib import blake2b
 from itertools import islice
 from pathlib import Path
@@ -36,11 +41,14 @@ from pathlib import Path
 from datasets import load_dataset
 
 # ── Ayarlar ──────────────────────────────────────────────────────────────────
-DATA_DIR    = Path("data")
+DATA_DIR    = Path("data")          # --out ile degistirilebilir (orn. Google Drive)
 SHARD_DIR   = DATA_DIR / "shards"
 STATE_FILE  = DATA_DIR / "state.json"
 LOG_FILE    = DATA_DIR / "collect.log"
 SAMPLE_FILE = DATA_DIR / "samples.txt"
+
+WRITE_BUFFER = 1 << 20              # 1 MB. Google Drive'a yazarken cok sayida kucuk
+                                    # yazma cok yavas; buyuk tampon bunu ortadan kaldirir.
 
 TOTAL_GB = 6.0                  # hedef: kabul edilen karakter toplami
 
@@ -209,7 +217,7 @@ class ShardWriter:
             self.close()
             self.index += 1
             path = SHARD_DIR / f"{self.name}_{self.index:04d}.txt"
-            self.fh = open(path, "w", encoding="utf-8")
+            self.fh = open(path, "w", encoding="utf-8", buffering=WRITE_BUFFER)
             self.count = 0
             log.info(f"  yeni shard: {path.name}")
         self.fh.write(line + "\n")
@@ -219,6 +227,43 @@ class ShardWriter:
         if self.fh:
             self.fh.close()
             self.fh = None
+
+
+# ── Cikti yeri ve Colab kapatma ──────────────────────────────────────────────
+def set_data_dir(path):
+    """
+    Cikti klasorunu belirler. Google Drive yolu verilirse (orn.
+    /content/drive/MyDrive/tr-tokenizer-data) veriler runtime olse bile kalir
+    ve sonraki oturumda resume calisir.
+    """
+    global DATA_DIR, SHARD_DIR, STATE_FILE, LOG_FILE, SAMPLE_FILE
+    DATA_DIR = Path(path)
+    SHARD_DIR = DATA_DIR / "shards"
+    STATE_FILE = DATA_DIR / "state.json"
+    LOG_FILE = DATA_DIR / "collect.log"
+    SAMPLE_FILE = DATA_DIR / "samples.txt"
+
+
+def shutdown_colab():
+    """
+    Colab runtime'ini kapatir; is bitince bosuna islem birimi yakilmasin.
+    Sira onemli: once log dosyasi kapanir, sonra Drive'daki bekleyen yazmalar
+    diske iner, en son runtime sonlandirilir.
+    """
+    try:
+        from google.colab import drive, runtime
+    except ImportError:
+        print("Colab disinda calisiliyor; runtime kapatma atlandi.")
+        return
+
+    logging.shutdown()
+    try:
+        drive.flush_and_unmount()
+        print("Drive bosaltildi.")
+    except Exception as e:
+        print(f"Drive flush atlandi ({type(e).__name__}); Drive bagli olmayabilir.")
+    print("Colab runtime kapatiliyor.")
+    runtime.unassign()
 
 
 # ── Durum (resume) ───────────────────────────────────────────────────────────
@@ -358,8 +403,13 @@ def main():
                     help="kotalari carpar; test icin 0.001 (~6 MB)")
     ap.add_argument("--fresh", action="store_true",
                     help="state.json'i yok say, bastan basla")
+    ap.add_argument("--out", default="data",
+                    help="cikti klasoru; Drive yolu verilirse runtime olse de kalir")
+    ap.add_argument("--shutdown", action="store_true",
+                    help="is bitince (veya hata alinca) Colab runtime'ini kapat")
     args = ap.parse_args()
 
+    set_data_dir(args.out)
     SHARD_DIR.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s | %(message)s", datefmt="%H:%M:%S",
@@ -374,39 +424,58 @@ def main():
     log.info("=" * 78)
     log.info(f"KORPUS TOPLAMA | hedef {total_chars / 1e6:,.0f} MB | scale={args.scale}")
     log.info(f"{len(SOURCES)} kaynak | dedup: blake2b-64 | log her {LOG_EVERY_SEC} sn")
+    log.info(f"cikti: {DATA_DIR.resolve()}")
     log.info("=" * 78)
 
     t0 = time.time()
-    with open(SAMPLE_FILE, "a", encoding="utf-8") as samples_fh:
-        for i, source in enumerate(SOURCES):
-            if i == len(SOURCES) - 1:
-                # Son kaynak oncekilerin dolduramadigi acigi kapatir
-                done = sum(state.get(s["name"], {}).get("chars", 0) for s in SOURCES[:-1])
-                quota = max(total_chars - done, 0)
-            else:
-                quota = int(total_chars * source["quota"])
-            collect_source(source, quota, seen, state, samples_fh)
+    try:
+        with open(SAMPLE_FILE, "a", encoding="utf-8") as samples_fh:
+            for i, source in enumerate(SOURCES):
+                if i == len(SOURCES) - 1:
+                    # Son kaynak oncekilerin dolduramadigi acigi kapatir
+                    done = sum(state.get(s["name"], {}).get("chars", 0) for s in SOURCES[:-1])
+                    quota = max(total_chars - done, 0)
+                else:
+                    quota = int(total_chars * source["quota"])
+                collect_source(source, quota, seen, state, samples_fh)
 
-    # ── Ozet ──
-    grand = sum(v["chars"] for v in state.values())
-    log.info("=" * 78)
-    log.info("TOPLAMA TAMAMLANDI")
-    for source in SOURCES:
-        st = state.get(source["name"], {"chars": 0, "lines": 0})
-        share = 100 * st["chars"] / grand if grand else 0
-        log.info(f"  {source['name']:9} {st['chars'] / 1e6:9,.1f} MB  {st['lines']:>10,} satir  "
-                 f"%{share:5.1f}  (hedef %{source['quota'] * 100:.1f})")
-    log.info(f"  {'TOPLAM':9} {grand / 1e6:9,.1f} MB  "
-             f"{sum(v['lines'] for v in state.values()):>10,} satir")
-    log.info(f"  essiz satir (dedup seti): {len(seen):,}")
-    log.info(f"  sure: {(time.time() - t0) / 60:.1f} dk")
-    log.info("=" * 78)
+        # ── Ozet ──
+        grand = sum(v["chars"] for v in state.values())
+        log.info("=" * 78)
+        log.info("TOPLAMA TAMAMLANDI")
+        for source in SOURCES:
+            st = state.get(source["name"], {"chars": 0, "lines": 0})
+            share = 100 * st["chars"] / grand if grand else 0
+            log.info(f"  {source['name']:9} {st['chars'] / 1e6:9,.1f} MB  {st['lines']:>10,} satir  "
+                     f"%{share:5.1f}  (hedef %{source['quota'] * 100:.1f})")
+        log.info(f"  {'TOPLAM':9} {grand / 1e6:9,.1f} MB  "
+                 f"{sum(v['lines'] for v in state.values()):>10,} satir")
+        log.info(f"  essiz satir (dedup seti): {len(seen):,}")
+        log.info(f"  sure: {(time.time() - t0) / 60:.1f} dk")
+        log.info("=" * 78)
+
+    except BaseException as e:
+        # Hatayi da log dosyasina yaz: kullanici donduğunde ne oldugunu gorsun.
+        log.exception(f"CALISMA YARIDA KESILDI: {type(e).__name__}: {e}")
+        log.info("Shard'lar ve state.json diskte; ayni komutla --fresh OLMADAN "
+                 "calistirirsan kaldigi yerden devam eder.")
+        raise
+
+    finally:
+        # Hata da olsa basari da olsa: runtime bosuna islem birimi yakmasin.
+        if args.shutdown:
+            shutdown_colab()
 
 
 if __name__ == "__main__":
-    main()
+    exit_code = 0
+    try:
+        main()
+    except BaseException:
+        traceback.print_exc()
+        exit_code = 1
     # datasets kutuphanesi arka planda indirme thread'leri birakiyor ve Python
     # cikista onlari bekliyor. Dosyalar kapandi, state kaydedildi, log bosaltildi;
     # asili kalmamak icin sureci burada bitiriyoruz.
     logging.shutdown()
-    os._exit(0)
+    os._exit(exit_code)
