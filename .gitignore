@@ -1,0 +1,19 @@
+# ── Veri: korpus dosyalari (GB'larca — bunlar HF Hub'da tutulacak) ──
+*.txt
+*.jsonl
+*.gz
+!requirements.txt
+output/temp_chunks/
+
+# ── Python ──
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ── Sirlar: HF token / API anahtari buraya dusmesin ──
+.env
+*.token
+
+# ── Colab / notebook ──
+.ipynb_checkpoints/
