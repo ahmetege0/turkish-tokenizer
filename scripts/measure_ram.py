@@ -97,17 +97,21 @@ def sample_lines(train_dir, budget):
     for source, paths in shards_by_source.items():
         source_budget = max(1, budget * len(paths) // total_shards)
         per_shard = max(1, source_budget // len(paths))
-        count = 0
+        source_count = 0
         for path in paths:
+            shard_count = 0    # HER shard'ta sifirlanir; bug: bu satir eskiden yoktu,
+                                # source_count tum shard'lar boyunca birikip ilk shard'tan
+                                # sonrakilerin hepsini ~1 satirda kesiyordu
             with open(path, encoding="utf-8") as fh:
                 for line in fh:
                     line = line.rstrip("\n")
                     if line:
                         lines.append(line)
-                        count += 1
-                        if count >= per_shard:
+                        shard_count += 1
+                        source_count += 1
+                        if shard_count >= per_shard:
                             break
-            if count >= source_budget:
+            if source_count >= source_budget:
                 break
 
     print(f"  {len(shards_by_source)} kaynaktan {len(lines):,} satir orneklendi",
