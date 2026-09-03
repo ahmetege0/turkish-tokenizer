@@ -255,7 +255,22 @@ fertility 2.16–3.81 arası, roundtrip hepsinde ✓. **Not:** demo'daki `(nB)` 
 "byte" değil "birleşmiş BPE token sayısı" gösteriyor (değişken adı `n_tokens`, etiket
 yanlış) — kozmetik, tokenizer'ın doğruluğunu etkilemiyor, düzeltilmedi (düşük öncelik).
 
-### Adım 3 — RAM tavanı ölçümü — script düzeltildi, ÇALIŞTIRILMADI 🔜
+### Adım 3 — RAM tavanı ölçümü — YAPILMAYACAK, bilinçli karar ✅
+
+3 nokta ölçüldü (8K/16K/32K, hepsi 551K satır/%2.5 korpus — bkz. aşağıdaki bug notu),
+vocab'ın RAM etkisi net: **~5.25 MB / 1000 vocab**. Korpus boyutunun etkisi hiç ölçülmedi
+(hep aynı sabit örnek). Tam korpusta (21.7M satır) doğru ölçüm ~2 saat sürecekti;
+kullanıcıyla maliyet simetrisini tartıştık: standart RAM seçip yetmezse 3-5 saatlik
+eğitim OOM'la çöküp baştan başlanır, yüksek RAM'i baştan seçip fazla gelirse sadece
+biraz daha fazla Colab birimi harcanır — ikinci risk çok daha ucuz. **Karar: ölçüme
+hiç girmeden 128K eğitimi doğrudan yüksek RAM (51 GB) CPU runtime'da yapılacak.**
+
+(Eski script hâlâ `scripts/measure_ram.py`'de duruyor, çalışır durumda, ileride farklı
+bir vocab/korpus kombinasyonu ölçmek istenirse kullanılabilir — ama gate değil artık.)
+
+<details>
+<summary>Script düzeltme geçmişi (referans için, artık bloke etmiyor)</summary>
+
 `scripts/measure_ram.py`, 2026-09-03 oturumunda **iki metodolojik hata** bulunup
 düzeltildi (side-agent'ın ilk versiyonu HENÜZ ÇALIŞTIRILMAMIŞTI, iyi ki):
 
@@ -275,15 +290,24 @@ düzeltildi (side-agent'ın ilk versiyonu HENÜZ ÇALIŞTIRILMAMIŞTI, iyi ki):
 sıçramalı veri). `--single` modu `resource` modülü Linux'a özgü olduğu için **lokalde
 (Windows) test edilemedi** — Colab'de ilk çalıştırmada dikkatle izlenmeli.
 
-**Bilinen sınırlama:** `--single` alt-süreçleri `capture_output=True` ile çalıştırılıyor,
-yani çalışırken canlı ilerleme görünmez (sadece başlama/bitme mesajı + süre). Ölçüm adımı
-kısa olduğu için (tahminen vocab başına 15-45 dk) bu kabul edilebilir bir basitleştirme,
-ama 3-5 saatlik asıl eğitimde AYNI YAKLAŞIM KULLANILMAMALI — orada gerçek 5 dk'lık canlı log
-şart.
+Sonra kullanıcı gerçekten çalıştırdı (3 nokta, hepsi 551K satır): sonuçlar tutarlıydı
+(doğrusallık sapması %1.0) ama **örnekleme fonksiyonunda 3. bir bug** ortaya çıktı —
+`sample_lines()` içinde `count` değişkeni kaynağın TÜM shard'ları boyunca birikip hiçbir
+shard'ta sıfırlanmıyordu; ilk shard doğru okunuyor, sonraki her shard ~1 satırda
+kesiliyordu. İstenen 3M yerine gerçekte hep ~551K (%2.5) çekiliyormuş — hesapla doğrulandı
+(tahmin: 551,056, gözlem: 551,056, %0 fark). **Bu düzeltildi** (`shard_count` artık her
+shard'ta sıfırlanıyor, `source_count` kaynak toplamı için ayrı tutuluyor) — aynı bug
+`smoke_test_tokenizer.py`'de de vardı, o da düzeltildi (smoke test'in 7/7 sonucu muhtemelen
+hâlâ geçerli, çünkü byte-alfabe garantisi `initial_alphabet` ile örnek boyutundan bağımsız).
 
-**Sırada:** Colab'de `python scripts/measure_ram.py --data /content/drive/MyDrive/tr-tokenizer-data`
-çalıştırılacak. **Bu adım geçmeden 128K eğitim script'i yazılmayacak** — çıktısı hangi
-runtime'ın (standart/yüksek RAM) ve hangi zaman bütçesinin gerektiğini belirliyor.
+Ayrıca `--single` moduna eğitim sırasında canlı kalp atışı eklendi (`threading` ile,
+`train_from_iterator` bloklarken bile 2 dk'da bir "hala çalışıyor + anlık RAM" basıyor —
+Rust tarafı GIL'i bıraktığı için bu mümkün, izole thread testiyle doğrulandı).
+
+Tüm bu düzeltmeler doğruydu ama **hiçbiri artık kullanılmıyor** — yukarıdaki karar
+gereği tam korpusta ölçüm hiç yapılmayacak. Script gelecekte lazım olursa hazır duruyor.
+
+</details>
 
 ### Adım 4 — 128K eğitimi (3-5 saat) 🔜
 Colab **yüksek RAM** CPU runtime. `train_from_iterator` ile `data/train/*.txt` okunur.
