@@ -151,7 +151,13 @@ sorumluluklarımızdandır  23 karakter → 27 ByteLevel
 **25 eşiği bunların hepsini bölerdi.** 28'de hepsi tek token olabiliyor,
 %99.990 kapsanıyor, 138M'de 13.219 parça kesiliyor.
 
-### Special token'lar — AÇIK KARAR
+### Special token'lar — Seçenek B seçildi (⚠️ kullanıcı teyidi bekliyor)
+
+Side-agent oturumunda **Seçenek B** ile devam edildi: `<s>=0 <pad>=1 </s>=2 <unk>=3 <mask>=4`,
+rezerv 5–31. `smoke_test_tokenizer.py` ve `measure_ram.py` bu düzenle yazıldı, smoke test
+7/7 geçti. **Ama bu repo'da kullanıcının A/B/C arasından bilinçli seçim yaptığına dair
+yazılı bir kayıt yok** — sadece side-agent'ın kararı uyguladığı görülüyor. Sonraki oturumda
+kullanıcıya "B'yi sen mi seçtin" diye bir kez teyit ettir; aksi belirtilmezse B ile devam et.
 
 Gerçek modellerden ölçülen veri (HF Hub config/vocab dosyalarından):
 
@@ -238,30 +244,46 @@ tek mekanizma. O(1) arama. 21.8M anahtar ≈ 1.64 GB RAM (ölçüldü: 75 byte/a
 ## 8. Sırada ne var
 
 ### Adım 1 — Special token kararı ⏳
-Kullanıcı araştırıyor. A/B/C seçenekleri yukarıda. Karar verilmeden eğitim yapılamaz.
+Bkz. yukarıdaki "Seçenek B seçildi" notu. Kullanıcıya bir kez teyit ettir, sonra kapat.
 
-### Adım 2 — Smoke testi (~10 dk) 🔜
-Küçük korpus (örn. 50K satır) + **~2000 vocab** ile tokenizer eğit, şunları **assert** et:
-1. `decode(encode(x)) == x` — çeşitli Türkçe cümlelerde.
-   ⚠️ NFKC uyguladığımız için karşılaştırma **NFKC-normalize edilmiş** metinle yapılmalı,
-   ham metinle değil (`ﬁnal` → `final` dönecek).
-2. **256 byte alfabesinin tamamı** vocab'da (eski tokenizer'da 27'si eksikti)
-3. Special token'lar beklenen ID'lerde
-4. `İSTANBUL` / `istanbul` / `İstanbul` doğru işleniyor, normalizer `İ`'yi bozmuyor
-5. Emoji, bozuk byte, İngilizce karışık metin `<unk>` üretmiyor
-6. `PreTrainedTokenizerFast` ile yüklenebiliyor
-7. Hiçbir token 28 ByteLevel karakterden uzun değil
+### Adım 2 — Smoke testi — ✅ TAMAMLANDI, 7/7 geçti
+`scripts/smoke_test_tokenizer.py`. 2000 vocab, orantılı ~50K satır örneklem. 7 assertion
+(roundtrip, byte alfabe tamlığı, special ID, casing, `<unk>` yok, HF yüklenebilirlik,
+max_token_length) hepsi geçti. Tokenizer `data/smoke_tokenizer.json`'a kaydedildi.
+`scripts/demo_tokenizer.py` bunu yükleyip dataset-dışı 6 metinle görsel demo yapıyor —
+fertility 2.16–3.81 arası, roundtrip hepsinde ✓. **Not:** demo'daki `(nB)` etiketi
+"byte" değil "birleşmiş BPE token sayısı" gösteriyor (değişken adı `n_tokens`, etiket
+yanlış) — kozmetik, tokenizer'ın doğruluğunu etkilemiyor, düzeltilmedi (düşük öncelik).
 
-**Bu test geçmeden 128K eğitimine girilmez.**
+### Adım 3 — RAM tavanı ölçümü — script düzeltildi, ÇALIŞTIRILMADI 🔜
+`scripts/measure_ram.py`, 2026-09-03 oturumunda **iki metodolojik hata** bulunup
+düzeltildi (side-agent'ın ilk versiyonu HENÜZ ÇALIŞTIRILMAMIŞTI, iyi ki):
 
-### Adım 3 — RAM tavanı ölçümü (~30 dk) 🔜
-8K → 16K → 32K vocab ile aynı korpus alt kümesinde tepe RAM ve süre ölç, 128K'ya
-ekstrapole et. Amaç: yüksek RAM runtime'ında kaç GB gerekeceğini bilmek.
-**Risk:** Türkçe eklemeli olduğu için benzersiz kelime tipi sayısı çok yüksek;
-`tokenizers` trainer'ı bunların hepsini frekansıyla bellekte tutuyor. 12.7 GB standart
-RAM'in yetmemesi kuvvetle muhtemel.
-**Not:** Alt küme alırken tüm kaynaklardan orantılı örnekle (dosya adı kaynak etiketi taşıyor);
-ilk N dosyayı almak temsili olmaz.
+1. `resource.ru_maxrss` sürecin **tüm ömrü boyunca hiç azalmayan** bir tavan. 8K/16K/32K'yi
+   aynı process'te sırayla ölçmek her adımın kendi tepe RAM'ini değil, kümülatif tavanı
+   raporlar. **Düzeltme:** her vocab boyutu artık `--single` bayrağıyla ayrı bir
+   alt-süreçte ölçülüyor (orchestrator `subprocess.run` ile çağırıyor).
+2. İlk versiyon sadece 500K satırlık (korpusun **%2.3**'ü) sabit örnekte vocab'ı
+   değiştiriyordu — korpus **boyutunun** RAM'e etkisi hiç ölçülmüyordu. Türkçe eklemeli
+   olduğu için benzersiz kelime tipi sayısı korpus büyüdükçe de artar (Heaps yasası).
+   **Düzeltme:** örneklem 500K → **3M satır** (~%14) çıkarıldı.
+3. Ek olarak: 16K noktası artık bir **doğrusallık kontrolü** için kullanılıyor (8K-32K
+   doğrusundan sapma >%15 ise uyarı basıyor) — 128K, 32K'nin 4 katı ötesi bir ekstrapolasyon,
+   doğrusallık varsayımını en azından ucuza sınamak için.
+
+`extrapolate()` ve `check_linearity()` senaryolarla test edildi (düz veri, anormal
+sıçramalı veri). `--single` modu `resource` modülü Linux'a özgü olduğu için **lokalde
+(Windows) test edilemedi** — Colab'de ilk çalıştırmada dikkatle izlenmeli.
+
+**Bilinen sınırlama:** `--single` alt-süreçleri `capture_output=True` ile çalıştırılıyor,
+yani çalışırken canlı ilerleme görünmez (sadece başlama/bitme mesajı + süre). Ölçüm adımı
+kısa olduğu için (tahminen vocab başına 15-45 dk) bu kabul edilebilir bir basitleştirme,
+ama 3-5 saatlik asıl eğitimde AYNI YAKLAŞIM KULLANILMAMALI — orada gerçek 5 dk'lık canlı log
+şart.
+
+**Sırada:** Colab'de `python scripts/measure_ram.py --data /content/drive/MyDrive/tr-tokenizer-data`
+çalıştırılacak. **Bu adım geçmeden 128K eğitim script'i yazılmayacak** — çıktısı hangi
+runtime'ın (standart/yüksek RAM) ve hangi zaman bütçesinin gerektiğini belirliyor.
 
 ### Adım 4 — 128K eğitimi (3-5 saat) 🔜
 Colab **yüksek RAM** CPU runtime. `train_from_iterator` ile `data/train/*.txt` okunur.
