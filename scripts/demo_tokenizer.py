@@ -75,9 +75,16 @@ def show_tokens(tok, text, label):
     print(f"  Roundtrip: {'✓' if roundtrip_ok else '✗ BASARISIZ'}")
     print()
 
-    # Token'lari satirda goster, "|" ile ayir
-    # ByteLevel token'lari okunakli gostermek icin Ġ → · donusumu
-    display = [t.replace("Ġ", "·") for t in encoded.tokens]
+    # Token'lari INSAN-OKUNABILIR goster: her token'i decode edip gercek
+    # karakterleri gosteriyoruz. ByteLevel ham gosterimi (ÅŁ, Ä±, Ã¼) yerine
+    # gercek Turkce harfler gorunur.
+    # Kelime basi bosluklari "_" ile isaretlenir (orn. _bir, _de).
+    display = []
+    for token_id in encoded.ids:
+        piece = tok.decode([token_id])
+        if piece.startswith(" "):
+            piece = "_" + piece[1:]
+        display.append(piece)
 
     # Satirda 80 karakter siniriyla token'lari goster
     line = "  "
