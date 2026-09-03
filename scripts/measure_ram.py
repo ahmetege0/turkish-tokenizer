@@ -232,25 +232,35 @@ def run_orchestrator(args):
         print(f"{'─' * 60}")
         t0 = time.time()
 
-        proc = subprocess.run(
+        # Popen + polling: subprocess.run(capture_output=True) sessizce
+        # bitene kadar hicbir sey basmiyordu -- 15-40 dk boyunca ekran
+        # "donmus" gorunebilirdi. Burada 2 dk'da bir kalp atisi basiyoruz.
+        proc = subprocess.Popen(
             [sys.executable, str(Path(__file__).resolve()), "--single",
              "--vocab", str(vocab), "--data", str(data_dir), "--lines", str(args.lines)],
-            capture_output=True, text=True,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
         )
+        last_beat = time.time()
+        while proc.poll() is None:
+            time.sleep(5)
+            if time.time() - last_beat >= 120:
+                print(f"  ... hala calisiyor ({(time.time() - t0) / 60:.1f} dk gecti)")
+                last_beat = time.time()
+        out, err = proc.communicate()
         wall = time.time() - t0
 
-        if proc.stderr:
-            print(proc.stderr.rstrip())
+        if err:
+            print(err.rstrip())
 
         if proc.returncode != 0:
-            print(proc.stdout[-3000:])
+            print(out[-3000:])
             raise SystemExit(f"Alt-surec basarisiz oldu (vocab={vocab}, "
                              f"exit={proc.returncode})")
 
-        line = next((ln for ln in proc.stdout.splitlines()
+        line = next((ln for ln in out.splitlines()
                     if ln.startswith(RESULT_MARKER)), None)
         if not line:
-            print(proc.stdout)
+            print(out)
             raise SystemExit(f"Alt-surecten sonuc satiri alinamadi (vocab={vocab})")
 
         r = json.loads(line[len(RESULT_MARKER):])
