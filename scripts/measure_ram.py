@@ -36,6 +36,7 @@ import argparse
 import json
 import subprocess
 import sys
+import threading
 import time
 from collections import defaultdict
 from pathlib import Path
@@ -146,8 +147,27 @@ def train_and_measure(lines, vocab_size):
         initial_alphabet=ByteLevel.alphabet(),
     )
 
+    # train_from_iterator TEK, bloklayan bir Rust cagrisi -- Python tarafindan
+    # icine log satiri sokamayiz. Ama tokenizers Rust hesaplama sirasinda GIL'i
+    # birakiyor, bu yuzden arka planda bir Python thread'i calisabiliyor: 2 dk'da
+    # bir "hala calisiyor" + ANLIK RAM (bu, ru_maxrss gibi kumulatif degil,
+    # gercek zamanli VmRSS -- egitim ilerledikce RAM'in nasil tirmandigini
+    # canli gorebiliyoruz).
     t0 = time.time()
-    tok.train_from_iterator(lines, trainer=trainer)
+    stop_heartbeat = threading.Event()
+
+    def heartbeat():
+        while not stop_heartbeat.wait(120):
+            print(f"  ... egitim suruyor ({(time.time() - t0) / 60:.1f} dk gecti, "
+                 f"anlik RAM {get_current_ram_mb():.0f} MB)", file=sys.stderr)
+
+    hb = threading.Thread(target=heartbeat, daemon=True)
+    hb.start()
+    try:
+        tok.train_from_iterator(lines, trainer=trainer)
+    finally:
+        stop_heartbeat.set()
+        hb.join(timeout=1)
     elapsed = time.time() - t0
 
     peak_ram = get_peak_ram_mb()
