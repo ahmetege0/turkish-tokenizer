@@ -15,9 +15,10 @@ Ne yapar:
      e) emoji, bozuk byte, karisik metin → <unk> yok
      f) PreTrainedTokenizerFast ile yuklenebilirlik
      g) hicbir token 28 ByteLevel karakterden uzun degil
+  4. Tokenizer'i diske kaydeder (demo_tokenizer.py yuklesin diye)
 
 Girdi : data/train/*.txt
-Cikti : konsol + data/smoke_report.md (+ gecici tokenizer dosyalari)
+Cikti : konsol + data/smoke_report.md + data/smoke_tokenizer.json
 
 Kullanim:
     python scripts/smoke_test_tokenizer.py --data /content/drive/MyDrive/tr-tokenizer-data
@@ -345,6 +346,11 @@ def main():
         print("Hatalar duzeltilmeden 128K egitimi YAPILMAZ.")
     print("=" * 60)
 
+    # Tokenizer'i diske kaydet — demo_tokenizer.py buradan yukler
+    tok_path = data_dir / "smoke_tokenizer.json"
+    tok.save(str(tok_path))
+    print(f"\nTokenizer kaydedildi: {tok_path}")
+
     # Rapor dosyasi
     report_path = data_dir / "smoke_report.md"
     with open(report_path, "w", encoding="utf-8") as fh:
@@ -355,7 +361,7 @@ def main():
         for name, p, f, status in results:
             fh.write(f"| {name} | {p} | {f} | {status} |\n")
         fh.write(f"\n**Genel: {'GECTI' if total_fail == 0 else 'BASARISIZ'}**\n")
-    print(f"\nRapor: {report_path}")
+    print(f"Rapor: {report_path}")
 
     sys.exit(1 if total_fail > 0 else 0)
 
