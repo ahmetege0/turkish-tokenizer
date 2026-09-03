@@ -75,16 +75,40 @@ def show_tokens(tok, text, label):
     print(f"  Roundtrip: {'✓' if roundtrip_ok else '✗ BASARISIZ'}")
     print()
 
-    # Token'lari INSAN-OKUNABILIR goster: her token'i decode edip gercek
-    # karakterleri gosteriyoruz. ByteLevel ham gosterimi (ÅŁ, Ä±, Ã¼) yerine
-    # gercek Turkce harfler gorunur.
-    # Kelime basi bosluklari "_" ile isaretlenir (orn. _bir, _de).
+    # Token'lari INSAN-OKUNABILIR goster.
+    # Sorun: emoji gibi cok byte'li karakterler kucuk vocab'da ayri token'lara
+    # bolunuyor. Tek byte'i decode edince gecerli UTF-8 olusmuyor → "�" cikiyor.
+    # Cozum: ardisik "bozuk" token'lari gruplayip birlikte decode et.
     display = []
-    for token_id in encoded.ids:
-        piece = tok.decode([token_id])
-        if piece.startswith(" "):
-            piece = "_" + piece[1:]
-        display.append(piece)
+    ids = encoded.ids
+    i = 0
+    while i < len(ids):
+        piece = tok.decode([ids[i]])
+        if "�" not in piece:
+            # Temiz token — dogrudan ekle
+            if piece.startswith(" "):
+                piece = "_" + piece[1:]
+            display.append(piece)
+            i += 1
+        else:
+            # Kismi byte — ardisik bozuklari grupla
+            j = i + 1
+            while j < len(ids):
+                group_decoded = tok.decode(list(ids[i:j + 1]))
+                if "�" not in group_decoded:
+                    break
+                j += 1
+            group_decoded = tok.decode(list(ids[i:j + 1]))
+            if "�" not in group_decoded:
+                n_tokens = j + 1 - i
+                if group_decoded.startswith(" "):
+                    group_decoded = "_" + group_decoded[1:]
+                display.append(f"{group_decoded}({n_tokens}B)")
+                i = j + 1
+            else:
+                # Hala decode edilemiyor — hex olarak goster
+                display.append(f"[0x{ids[i]:02X}]")
+                i += 1
 
     # Satirda 80 karakter siniriyla token'lari goster
     line = "  "
